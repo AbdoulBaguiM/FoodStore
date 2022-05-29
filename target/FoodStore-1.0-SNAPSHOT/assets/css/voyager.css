@@ -1,0 +1,119 @@
+.label{padding:.25em .6em .25em;font-weight:300;border-radius:.3em}.label.label-outline{color:#f3f7f9;background-color:transparent;border-color:#f3f7f9}.label-outline{border:1px solid transparent}.label-round{border-radius:1em}.label-default{color:#76838f;background-color:#e4eaec}.label-default[href]:focus,.label-default[href]:hover{background-color:#f3f7f9}.label-default.label-outline{color:#e4eaec;background-color:transparent;border-color:#e4eaec}.label-default[href]:focus,.label-default[href]:hover{color:#a3afb7}.label-default.label-outline{color:#76838f}.label-primary{background-color:#62a8ea}.label-primary[href]:focus,.label-primary[href]:hover{background-color:#89bceb}.label-primary.label-outline{color:#62a8ea;background-color:transparent;border-color:#62a8ea}.label-success{background-color:#46be8a}.label-success[href]:focus,.label-success[href]:hover{background-color:#5cd29d}.label-success.label-outline{color:#46be8a;background-color:transparent;border-color:#46be8a}.label-info{background-color:lightgreen}.label-info[href]:focus,.label-info[href]:hover{background-color:#77d6e1}.label-info.label-outline{color:#57c7d4;background-color:transparent;border-color:#57c7d4}.label-warning{background-color:#f2a654}.label-warning[href]:focus,.label-warning[href]:hover{background-color:#f4b066}.label-warning.label-outline{color:#f2a654;background-color:transparent;border-color:#f2a654}.label-danger{background-color:#f96868}.label-danger[href]:focus,.label-danger[href]:hover{background-color:#fa7a7a}.label-danger.label-outline{color:#f96868;background-color:transparent;border-color:#f96868}.label-dark{background-color:#526069}.label-dark[href]:focus,.label-dark[href]:hover{background-color:#76838f}.label-dark.label-outline{color:#526069;background-color:transparent;border-color:#526069}.label-lg{font-size:16px}.label-sm{padding:.1em .5em .1em;font-size:10px}.badge{padding:3px 6px}
+
+.notifications-item {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 6px 9px;
+    margin-bottom: 0px;
+    cursor: pointer
+}
+
+.notifications-item:hover {
+    background-color: #eee
+}
+
+.notifications-item img {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-right: 9px;
+    border-radius: 50%;
+    margin-top: 2px
+}
+
+.notifications-item .text h4 {
+    color: #777;
+    font-size: 16px;
+    margin-top: 3px
+}
+
+.notifications-item .text p {
+    color: #aaa;
+    font-size: 12px
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background-color: #17A2B8;
+}
+.dropdown-menu{
+    top: 60px;
+    right: 0px;
+    left: unset;
+    width: 460px;
+    overflow: auto;
+    box-shadow: 0px 5px 7px -1px #c1c1c1;
+    padding-bottom: 0px;
+    padding: 0px;
+}
+.dropdown-menu:before{
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: 12px;
+    border:10px solid #343A40;
+    border-color: transparent transparent #343A40 transparent;
+}
+.head{
+    height: 30px;
+    padding:5px 15px;
+    border-radius: 3px 3px 0px 0px;
+    background: #343A40;
+    color: white;
+}
+.notification-box{
+    padding: 10px 0px;
+}
+.bg-gray{
+    background-color: #eee;
+}
+@media (max-width: 640px) {
+    .dropdown-menu{
+        top: 50px;
+        left: -16px;
+        width: 290px;
+    }
+    .nav{
+        display: block;
+    }
+    .nav .nav-item,.nav .nav-item a{
+        padding-left: 0px;
+    }
+    .message{
+        font-size: 13px;
+    }
+}
+
+.qty {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 10px;
+    color: #FFF;
+    background-color: red;
+}
+
+.notification-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.notification-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.unstyled-button {
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.unstyled-button:hover{
+    color: #22A7F0;
+}
