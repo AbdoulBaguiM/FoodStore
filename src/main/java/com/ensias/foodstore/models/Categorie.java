@@ -3,6 +3,8 @@ package com.ensias.foodstore.models;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categorie")
@@ -23,6 +25,9 @@ public class Categorie {
 
     @Column(name = "updated_at")
     private Instant updatedAt;
+
+    @OneToMany(targetEntity = Produit.class, fetch = FetchType.LAZY)
+    private List<Produit> produits = new ArrayList<Produit>();
 
     public Integer getId() {
         return id;
@@ -64,4 +69,12 @@ public class Categorie {
         this.updatedAt = updatedAt;
     }
 
+
+    public List<Produit> getProduits() {
+        return produits;
+    }
+
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
+    }
 }

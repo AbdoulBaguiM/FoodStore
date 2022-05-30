@@ -36,7 +36,6 @@
     <![endif]-->
 </head>
 <body>
-
     <!-- HEADER -->
     <jsp:include page="/views/extras/header.jsp"/>
     <!-- /HEADER -->
@@ -57,6 +56,10 @@
     <jsp:include page="/views/extras/footer.jsp"/>
     <!-- /FOOTER -->
 
+    <!-- EXTRAS(js) -->
+    <jsp:invoke fragment="footer"/>
+    <!-- EXTRAS(js) -->
+
     <!-- jQuery Plugins -->
     <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
@@ -64,6 +67,7 @@
     <script src="${pageContext.request.contextPath}/assets/js/nouislider.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/jquery.zoom.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/spinner.js"></script>
 
 </body>
 </html>

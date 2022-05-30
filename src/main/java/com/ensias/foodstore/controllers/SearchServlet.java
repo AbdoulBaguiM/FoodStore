@@ -23,8 +23,8 @@ public class SearchServlet extends HttpServlet {
             sqlQuery = "SELECT p FROM Produit p WHERE p.nom like '%"+query+"%' and categorie_id="+idc;
 
         request.setAttribute("query",query);
-        request.setAttribute("produits", FoodShopDao.getProductsBySearch(sqlQuery));
         request.setAttribute("categories", FoodShopDao.getAllCategories());
+        request.setAttribute("produits", FoodShopDao.getProductsBySearch(sqlQuery));
 
         this.getServletContext().getRequestDispatcher("/views/search.jsp").forward(request, response);
     }

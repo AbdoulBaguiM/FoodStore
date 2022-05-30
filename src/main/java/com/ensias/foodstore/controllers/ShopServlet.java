@@ -16,8 +16,16 @@ public class ShopServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setAttribute("categories", FoodShopDao.getAllCategories());
-        request.setAttribute("produits",FoodShopDao.getAllProducts());
         request.setAttribute("bestSales", FoodShopDao.getBestSales());
+
+        String param = request.getParameter("id") == null ? "" : request.getParameter("id");
+
+        if(!param.isEmpty()){
+            int id = Integer.parseInt(param);
+            request.setAttribute("produits", FoodShopDao.getProductsByCategory(id));
+        }
+        else
+            request.setAttribute("produits",FoodShopDao.getAllProducts());
 
         this.getServletContext().getRequestDispatcher("/views/store.jsp").forward(request, response);
     }

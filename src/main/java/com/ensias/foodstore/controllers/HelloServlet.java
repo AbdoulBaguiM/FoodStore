@@ -13,9 +13,9 @@ public class HelloServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+        request.setAttribute("categories", FoodShopDao.getAllCategories());
         request.setAttribute("newProducts", FoodShopDao.getAllFeaturedProducts());
         request.setAttribute("bestSales", FoodShopDao.getBestSales());
-        request.setAttribute("categories", FoodShopDao.getAllCategories());
 
         this.getServletContext().getRequestDispatcher("/views/index.jsp").forward(request, response);
     }

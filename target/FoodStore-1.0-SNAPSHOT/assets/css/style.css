@@ -1553,14 +1553,14 @@ textarea.input {
   text-transform: uppercase;
   font-weight: 700;
   margin-left: 30px;
-  color: #f96302;
+  color: #02b602;
 }
 .product-details .product-not-available {
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 700;
     margin-left: 30px;
-    color: #f96302;
+    color: red;
 }
 
 .product-details .product-options {
