@@ -74,7 +74,11 @@
                                                 </div>
                                             </div>
                                             <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Commander</button>
+                                                <form action="/panier" method="POST">
+                                                    <input type="hidden" name="id" value="${produit.id}">
+                                                    <input type="hidden" name="qte" value="1">
+                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Commander</button>
+                                                </form>
                                             </div>
                                         </a>
                                     </div>

@@ -84,7 +84,7 @@
                                         <img src="/assets/img/${produit.photoPrincipale}" alt="">
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category"><a href="/rechercher?idc=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
+                                        <p class="product-category"><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></p>
                                         <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
                                         <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
                                     </div>
@@ -123,8 +123,8 @@
                                                 </div>
                                             </div>
                                             <div class="product-body">
-                                                <p class="product-category">${produit.categorie.nom}</p>
-                                                <h3 class="product-name"><a href="#">${produit.nom}</a></h3>
+                                                <p class="product-category"><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></p>
+                                                <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
                                                 <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
                                                 <div class="product-rating">
                                                     <i class="fa fa-star"></i>
@@ -140,7 +140,11 @@
                                                 </div>
                                             </div>
                                             <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Commander</button>
+                                                <form action="/panier" method="POST">
+                                                    <input type="hidden" name="id" value="${produit.id}">
+                                                    <input type="hidden" name="qte" value="1">
+                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Commander</button>
+                                                </form>
                                             </div>
                                         </a>
                                     </div>

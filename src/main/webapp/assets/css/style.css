@@ -1555,6 +1555,15 @@ textarea.input {
   margin-left: 30px;
   color: #02b602;
 }
+
+.product-details .product-available-low {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-left: 30px;
+  color: #fcc600;
+}
+
 .product-details .product-not-available {
     font-size: 12px;
     text-transform: uppercase;

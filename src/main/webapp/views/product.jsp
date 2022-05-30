@@ -84,8 +84,11 @@
                                     <c:when test="${produit.quantite > 5}">
                                         <span class="product-available">En stock</span>
                                     </c:when>
+                                    <c:when test="${produit.quantite >= 1}">
+                                        <span class="product-available-low">Stock faible</span>
+                                    </c:when>
                                     <c:otherwise>
-                                        <span class="product-not-available">En rupture</span>
+                                        <span class="product-not-available">En rupture de stock</span>
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -111,10 +114,9 @@
                                     <p></p>
 
                                     <button  style="display: none">
-                                        <form action="#" method="POST" id="add_to_cart">
+                                        <form action="/panier" method="POST" id="add_to_cart">
                                             <input type="hidden" name="id" value="${produit.id}">
-                                            <input type="hidden" name="nom" value="${produit.nom}">
-                                            <input type="hidden" name="prix_ht" value="${produit.prixHt}">
+
                                             <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Ajouter au Panier</button>
                                         </form>
                                     </button>
@@ -135,7 +137,7 @@
                             <ul class="product-links">
                                 <li>Categorie :</li>
 
-                                <li><a href="/rechercher?idc=${produit.categorie.id}&query=">${produit.categorie.nom}</a></li>
+                                <li><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></li>
 
                             </ul>
 

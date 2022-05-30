@@ -9,7 +9,7 @@
                 <li class="active"><a href="/">Acceuil</a></li>
                 <li><a href="/boutique">Boutique</a></li>
                 <c:forEach var="categorie" items="${categories}">
-                    <li><a href="/rechercher?idc=${categorie.id}&query=">${categorie.nom}</a></li>
+                    <li><a href="/boutique?id=${categorie.id}">${categorie.nom}</a></li>
                 </c:forEach>
             </ul>
             <!-- /NAV -->

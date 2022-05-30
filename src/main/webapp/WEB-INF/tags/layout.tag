@@ -67,7 +67,30 @@
     <script src="${pageContext.request.contextPath}/assets/js/nouislider.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/jquery.zoom.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/spinner.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/cart.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/axios.js"></script>
+    <script>
+        (function(){
+            const classname = document.querySelectorAll('.quantity')
 
+            Array.from(classname).forEach(function(element) {
+                element.addEventListener('change', function() {
+                    const params = new URLSearchParams();
+                    const id = element.getAttribute('data-id')
+
+                    params.append('id', id);
+                    params.append('qte',this.value)
+
+                    axios.post('/panier', params)
+                        .then(function (response) {
+                            window.location.href = '/panier'
+                        })
+                        .catch(function (error) {
+                            console.log(response);
+                        });
+                })
+            })
+        })();
+    </script>
 </body>
 </html>
