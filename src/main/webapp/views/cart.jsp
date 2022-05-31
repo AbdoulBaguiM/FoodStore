@@ -14,7 +14,7 @@
             </div>
 
             <c:choose>
-                <c:when test="${panier != null}">
+                <c:when test="${panier.items.size() > 0}">
                     <div class="cart">
                         <%--@if (session()->has('success_message'))
                         <div class="alert alert-success">
@@ -58,13 +58,13 @@
                                                 <p class="stockStatus">
                                                     <c:choose>
                                                         <c:when test="${lignePanier.produit.quantite > 5}">
-                                                            <span class="product-available">En stock</span>
+                                                            <span style="color: forestgreen">En Stock</span>
                                                         </c:when>
                                                         <c:when test="${lignePanier.produit.quantite >= 1}">
-                                                            <span class="product-available-low">Stock faible</span>
+                                                            <span style="color: darkorange">Stock Faible</span>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <span class="product-not-available">En rupture de stock</span>
+                                                            <span style="color: red">Epuisé</span>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </p>
@@ -72,15 +72,14 @@
                                             <div class="cell2">
                                                 <div class="prodTotal cartSection">
                                                     <p>${lignePanier.produit.prixHt * lignePanier.quantite} DHS</p>
-                                                    <%--<div class="cartSection removeWrap">
-                                                        <form action="{{route('supprimer_du_panier',$item->rowId)}}" method="POST">
-                                                            @csrf
-                                                            {{method_field('DELETE')}}
-
+                                                    <div class="cartSection removeWrap">
+                                                        <form action="/panier" method="POST">
+                                                            <input type="hidden" name="action" value="supprimer">
+                                                            <input type="hidden" name="id" value="${lignePanier.produit.id}">
+                                                            <input type="hidden" name="qte" value="${lignePanier.quantite}">
                                                             <button class="delete" type="submit"><i class="fa fa-close"></i></button>
-
                                                         </form>
-                                                    </div>--%>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -91,15 +90,14 @@
                         </ul>
                     </div>
 
-                    <%--<div class="subtotal cf">
+                    <div class="subtotal cf">
                         <ul>
-                            <li class="totalRow"><span class="label">Sous-Total</span><span class="value">{{Cart::subtotal()}} Dhs</span></li>
-                            <li class="totalRow"><span class="label">Frais de Livraison</span><span class="value">{{getLivraisonPrice()}} Dhs</span></li>
-                            <li class="totalRow"><span class="label">Taxe</span><span class="value">{{setting('site.tax')}} %</span></li>
-                            <li class="totalRow final"><span class="label">Total</span><span class="value">{{floatval(str_replace(',', '', Cart::total())) + getLivraisonPrice()}} Dhs</span></li>
-                            <li class="totalRow"><a href="{{route('checkout_commande')}}" class="btn-local continue">Commander</a></li>
+                            <li class="totalRow"><span class="label">Sous-Total</span><span class="value">${panier.totalPanier()} Dhs</span></li>
+                            <li class="totalRow"><span class="label">Frais de Livraison</span><span class="value">${panier.fraixLivraison()} Dhs</span></li>
+                            <li class="totalRow final"><span class="label">Total</span><span class="value">${panier.totalPanier() + panier.fraixLivraison()} Dhs</span></li>
+                            <li class="totalRow"><a href="#" class="btn-local continue">Commander</a></li>
                         </ul>
-                    </div>--%>
+                    </div>
                 </c:when>
                 <c:otherwise>
                     <div class="spacer"></div>

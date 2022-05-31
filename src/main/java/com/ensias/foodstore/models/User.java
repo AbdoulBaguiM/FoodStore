@@ -49,6 +49,7 @@ public class User {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+
     public Long getId() {
         return id;
     }

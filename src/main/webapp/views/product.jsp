@@ -80,17 +80,19 @@
                                     <del class="product-old-price"> {{getProductDelPrice($produit)}} Dhs</del>
                                     @endif--%>
                                 </h3>
+                                <span class="product-available">
                                 <c:choose>
                                     <c:when test="${produit.quantite > 5}">
-                                        <span class="product-available">En stock</span>
+                                        <span style="color: forestgreen">En Stock</span>
                                     </c:when>
                                     <c:when test="${produit.quantite >= 1}">
-                                        <span class="product-available-low">Stock faible</span>
+                                        <span style="color: darkorange">Stock Faible</span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span class="product-not-available">En rupture de stock</span>
+                                        <span style="color: red">Epuise</span>
                                     </c:otherwise>
                                 </c:choose>
+                                </span>
                             </div>
                             <p>${produit.details}</p>
 
@@ -115,8 +117,8 @@
 
                                     <button  style="display: none">
                                         <form action="/panier" method="POST" id="add_to_cart">
+                                            <input type="hidden" name="action" value="update">
                                             <input type="hidden" name="id" value="${produit.id}">
-
                                             <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Ajouter au Panier</button>
                                         </form>
                                     </button>
@@ -129,7 +131,7 @@
                                         <input type="hidden" name="id" value="${produit.id}">
                                         <input type="hidden" name="nom" value="${produit.nom}">
                                         <input type="hidden" name="prix_ht" value="${produit.prixHt}">
-                                        <button class="unstyled-button" type="submit" style="font-weight: 500;text-transform: uppercase;"><i class="fa fa-heart-o"></i> Ajouter a la Wishlist</button>
+                                        <button class="unstyled-button" type="submit" style="font-weight: 500;text-transform: uppercase;"><i class="fa fa-heart-o"></i> Ajouter a ma Wishlist</button>
                                     </form>
                                 </li>
                             </ul>
@@ -141,11 +143,13 @@
 
                             </ul>
 
-                            <%--{!! Share::page('http://127.0.0.1:8000/boutique/'.$produit->id, null, [], '<ul class="product-links"><li>Partager : </li>', '</ul>')
-                            ->facebook()
-                            ->twitter()
-                            ->whatsapp()
-                            ->linkedin(); !!}--%>
+                            <ul class="product-links">
+                                <li>Partager :</li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                            </ul>
 
                         </div>
                     </div>

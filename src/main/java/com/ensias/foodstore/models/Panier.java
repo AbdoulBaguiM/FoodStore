@@ -35,19 +35,44 @@ public class Panier {
         }
     }
 
-    public void augmenterQte(int produitId) {
-        for(LignePanier lignePanier:items)
-            if (lignePanier.getProduit().getId() == produitId) {
-                lignePanier.setQuantite(lignePanier.getQuantite()+1);
+    public void supprimerProduit(int produitId) {
+        for(LignePanier lignePanier:items) {
+            if(lignePanier.getProduit().getId() == produitId){
+                items.remove(lignePanier);
                 break;
             }
+        }
     }
 
-    public void diminuerQte(int produitId) {
+    public void updateItem(int produitId, int quantite) {
+        boolean flag = true;
+
         for(LignePanier lignePanier:items)
             if (lignePanier.getProduit().getId() == produitId) {
-                lignePanier.setQuantite(lignePanier.getQuantite()-1);
+                lignePanier.setQuantite(lignePanier.getQuantite()+quantite);
+                flag = false;
                 break;
             }
+
+        if (flag) {
+            Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+            Produit produit = session.get(Produit.class,produitId);
+            LignePanier lignePanier = new LignePanier(produit, quantite);
+            items.add(lignePanier);
+        }
+    }
+
+    public double totalPanier() {
+        double total = 0;
+
+        for(LignePanier lignePanier:items) {
+            total+=lignePanier.getProduit().getPrixHt()*lignePanier.getQuantite();
+        }
+        return total;
+    }
+
+    public double fraixLivraison() {
+        double frais = 10;
+        return frais;
     }
 }

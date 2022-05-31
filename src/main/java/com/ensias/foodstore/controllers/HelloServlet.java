@@ -20,6 +20,11 @@ public class HelloServlet extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/views/index.jsp").forward(request, response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+
     public void destroy() {
     }
 

@@ -22,8 +22,8 @@ public class CartServlet extends HttpServlet {
 
         String action = request.getParameter("action")==null ? "ajouter" : request.getParameter("action");
 
-        int produitId = Integer.parseInt(request.getParameter("id"));
-        int quantite = Integer.parseInt(request.getParameter("qte"));
+        int produitId;
+        int quantite;
 
         Panier panier = null;
         if(request.getSession().getAttribute("panier")!=null){
@@ -33,15 +33,20 @@ public class CartServlet extends HttpServlet {
         }
 
         if (action.equals("ajouter")){
+             produitId = Integer.parseInt(request.getParameter("id"));
+             quantite = Integer.parseInt(request.getParameter("qte"));
             panier.addItems(produitId, quantite);
         }
 
-        if(action.equals("augmenter")){
-            panier.augmenterQte(produitId);
+        if(action.equals("supprimer")){
+            produitId = Integer.parseInt(request.getParameter("id"));
+            panier.supprimerProduit(produitId);
         }
 
-        if(action.equals("diminuer")){
-            panier.diminuerQte(produitId);
+        if(action.equals("update")) {
+            produitId = Integer.parseInt(request.getParameter("id"));
+            quantite = Integer.parseInt(request.getParameter("quant["+produitId+"]"));
+            panier.updateItem(produitId,quantite);
         }
 
         request.getSession().setAttribute("panier",panier);

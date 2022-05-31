@@ -9,8 +9,44 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 67, Agdal, Rue Khalil - Rabat</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> DHS</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> Mon Compte</a></li>
+                <c:choose>
+                    <c:when test="${utilisateur != null}">
+                        <li class="dropdown profile" style="margin-right: 3%">
+                            <a href="#" class="dropdown-toggle text-right" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><nobr/><i class="fa fa-user"></i> Bienvenue ${utilisateur.name} <i class="fa fa-caret-down"></i></a></nobr>
+
+                            <ul class="dropdown-menu dropdown-menu-animated">
+                                <br>
+                                <li class="profile-img" style="padding: 10px" align="center">
+                                    <img src="/assets/img/${utilisateur.avatar}" style="width: 50px;height: 50px;border-radius: 10px;">
+                                    <div style="color: white"> S</div>
+                                    <div class="profile-body" align="center">
+                                        <h5>${utilisateur.name}</h5>
+                                        <h6>${utilisateur.email}</h6>
+                                    </div>
+                                </li>
+                                <hr>
+                                <li>
+                                    <a href="" style="color: black;">
+                                        <i class="fa fa-user"></i> Mon Profil
+                                    </a>
+                                </li>
+                                <div class="spacer"></div>
+                                <li>
+                                    <form action="/deconnexion" method="POST">
+                                        <button type="submit" class="secondary-btn"  style="position: center">
+                                            Deconnexion
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/connexion"><i class="fa fa-lock"></i>Mon Compte</a></li>
+                    </c:otherwise>
+                </c:choose>
+
             </ul>
         </div>
     </div>
@@ -25,7 +61,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="/" class="logo">
                             <img src="/assets/ginfo/logo.png" alt="" width="169" height="70">
                         </a>
                     </div>
@@ -78,13 +114,18 @@
                                                         <h3 class="product-name"><a href="/produit?id=${lignePanier.produit.id}">${lignePanier.produit.nom}</a></h3>
                                                         <h4 class="product-price"><span class="qty">${lignePanier.quantite}x</span>${lignePanier.produit.prixHt} DHS</h4>
                                                     </div>
-                                                    <button class="delete"><i class="fa fa-close"></i></button>
+                                                    <form action="/panier" method="POST">
+                                                        <input type="hidden" name="action" value="supprimer">
+                                                        <input type="hidden" name="id" value="${lignePanier.produit.id}">
+                                                        <input type="hidden" name="qte" value="${lignePanier.quantite}">
+                                                        <button class="delete"><i class="fa fa-close"></i></button>
+                                                    </form>
                                                 </div>
                                             </c:forEach>
                                         </div>
                                         <div class="cart-summary">
                                             <small>${panier.items.size()} Plat(s) selectionnes</small>
-                                            <h5>SOUS-TOTAL: $2940.00</h5>
+                                            <h5>SOUS-TOTAL : ${panier.totalPanier()} DHS</h5>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
