@@ -137,7 +137,7 @@
 
                                 <div class="cart-btns">
                                     <a href="/panier">Voir Panier</a>
-                                    <a href="#">Commander  <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="/commander">Commander  <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>

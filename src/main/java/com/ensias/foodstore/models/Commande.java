@@ -37,20 +37,20 @@ public class Commande {
     @Column(name = "c_telephone", nullable = false)
     private String cTelephone;
 
-    @Column(name = "c_discount", nullable = false)
+    @Column(name = "c_discount")
     private Integer cDiscount;
 
     @Column(name = "c_discountCode")
     private String cDiscountcode;
 
     @Column(name = "c_subtotal", nullable = false)
-    private Integer cSubtotal;
+    private double cSubtotal;
 
-    @Column(name = "c_taxe", nullable = false)
+    @Column(name = "c_taxe")
     private Integer cTaxe;
 
     @Column(name = "c_total", nullable = false)
-    private Integer cTotal;
+    private double cTotal;
 
     @Column(name = "c_payement")
     private Boolean cPayement;
@@ -155,11 +155,11 @@ public class Commande {
         this.cDiscountcode = cDiscountcode;
     }
 
-    public Integer getCSubtotal() {
+    public double getCSubtotal() {
         return cSubtotal;
     }
 
-    public void setCSubtotal(Integer cSubtotal) {
+    public void setCSubtotal(double cSubtotal) {
         this.cSubtotal = cSubtotal;
     }
 
@@ -171,11 +171,11 @@ public class Commande {
         this.cTaxe = cTaxe;
     }
 
-    public Integer getCTotal() {
+    public double getCTotal() {
         return cTotal;
     }
 
-    public void setCTotal(Integer cTotal) {
+    public void setCTotal(double cTotal) {
         this.cTotal = cTotal;
     }
 

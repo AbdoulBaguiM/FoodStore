@@ -33,20 +33,23 @@ public class CartServlet extends HttpServlet {
         }
 
         if (action.equals("ajouter")){
-             produitId = Integer.parseInt(request.getParameter("id"));
-             quantite = Integer.parseInt(request.getParameter("qte"));
+            produitId = Integer.parseInt(request.getParameter("id"));
+            quantite = Integer.parseInt(request.getParameter("qte"));
             panier.addItems(produitId, quantite);
+            request.setAttribute("messageSucces","Le plat a été ajouté à votre panier");
         }
 
         if(action.equals("supprimer")){
             produitId = Integer.parseInt(request.getParameter("id"));
             panier.supprimerProduit(produitId);
+            request.setAttribute("messageSucces","Le plat a été supprimmé de votre panier");
         }
 
         if(action.equals("update")) {
             produitId = Integer.parseInt(request.getParameter("id"));
             quantite = Integer.parseInt(request.getParameter("quant["+produitId+"]"));
             panier.updateItem(produitId,quantite);
+            request.setAttribute("messageSucces","Le plat a été ajouté à votre panier");
         }
 
         request.getSession().setAttribute("panier",panier);

@@ -16,21 +16,17 @@
             <c:choose>
                 <c:when test="${panier.items.size() > 0}">
                     <div class="cart">
-                        <%--@if (session()->has('success_message'))
-                        <div class="alert alert-success">
-                            {{ session()->get('success_message') }}
-                        </div>
-                        @endif
+                        <c:if test="${messageSucces != null}">
+                            <div class="alert alert-success">
+                                    ${messageSucces}
+                            </div>
+                        </c:if>
 
-                        @if(count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif--%>
+                        <c:if test="${messageErreur != null}">
+                            <div class="alert alert-danger">
+                                    ${messageErreur}
+                            </div>
+                        </c:if>
 
                         <h2>${panier.items.size()} element(s) dans le Panier</h2>
 
@@ -95,7 +91,7 @@
                             <li class="totalRow"><span class="label">Sous-Total</span><span class="value">${panier.totalPanier()} Dhs</span></li>
                             <li class="totalRow"><span class="label">Frais de Livraison</span><span class="value">${panier.fraixLivraison()} Dhs</span></li>
                             <li class="totalRow final"><span class="label">Total</span><span class="value">${panier.totalPanier() + panier.fraixLivraison()} Dhs</span></li>
-                            <li class="totalRow"><a href="#" class="btn-local continue">Commander</a></li>
+                            <li class="totalRow"><a href="/commander" class="btn-local continue">Commander</a></li>
                         </ul>
                     </div>
                 </c:when>

@@ -181,4 +181,8 @@ public class FoodShopDao {
         return produits;
     }
 
+    public static String[] getCoveredCities() {
+        String[] cities = {"Agadir","Casablanca","Fes","Kenitra","Meknes","Oujda","Tanger"};
+        return cities;
+    }
 }

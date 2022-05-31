@@ -108,6 +108,19 @@
 
                         <!-- store products -->
                         <div class="row">
+                            <c:if test="${messageSucces != null}">
+                                <div class="alert alert-success">
+                                        ${messageSucces}
+                                </div>
+                            </c:if>
+
+                            <c:if test="${messageErreur != null}">
+                                <div class="alert alert-danger">
+                                        ${messageErreur}
+                                </div>
+                            </c:if>
+                        </div>
+                        <div class="row">
                             <c:forEach var="produit" items="${produits}">
                                 <!-- product -->
                                 <div class="col-md-4 col-xs-6">

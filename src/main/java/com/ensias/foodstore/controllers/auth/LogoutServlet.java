@@ -16,6 +16,6 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
-        request.getRequestDispatcher("").forward(request,response);
+        response.sendRedirect("/");
     }
 }
