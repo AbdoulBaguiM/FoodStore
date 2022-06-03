@@ -48,7 +48,7 @@
                                     <div class="product">
                                         <a href="/produit?id=${produit.id}">
                                             <div class="product-img">
-                                                <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                                <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                                 <div class="product-label">
                                                     <span class="sale">-30%</span>
                                                     <c:if test="${produit.featured == true}">

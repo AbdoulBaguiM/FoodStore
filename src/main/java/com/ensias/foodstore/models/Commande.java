@@ -3,6 +3,8 @@ package com.ensias.foodstore.models;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "commandes")
@@ -56,7 +58,7 @@ public class Commande {
     private Boolean cPayement;
 
     @Column(name = "statut", nullable = false)
-    private Boolean statut = false;
+    private int statut = 0;
 
     @Column(name = "erreur")
     private String erreur;
@@ -66,6 +68,19 @@ public class Commande {
 
     @Column(name = "updated_at")
     private Instant updatedAt;
+
+    @OneToMany(mappedBy = "commande")
+    private List<CommandeProduit> commandeProduits = new ArrayList<CommandeProduit>();
+
+    public List<CommandeProduit> getCommandeProduits() {
+        return commandeProduits;
+    }
+
+    public void setCommandeProduits(List<CommandeProduit> commandeProduits) {
+        this.commandeProduits = commandeProduits;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -187,11 +202,11 @@ public class Commande {
         this.cPayement = cPayement;
     }
 
-    public Boolean getStatut() {
+    public int getStatut() {
         return statut;
     }
 
-    public void setStatut(Boolean statut) {
+    public void setStatut(int statut) {
         this.statut = statut;
     }
 

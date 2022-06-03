@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/auth/profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/auth" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/extras/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/extras" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/product.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views" />
       </map>

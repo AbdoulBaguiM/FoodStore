@@ -18,7 +18,7 @@
                             <ul class="dropdown-menu dropdown-menu-animated">
                                 <br>
                                 <li class="profile-img" style="padding: 10px" align="center">
-                                    <img src="/assets/img/${utilisateur.avatar}" style="width: 50px;height: 50px;border-radius: 10px;">
+                                    <img src="/storage/user.png" style="width: 50px;height: 50px;border-radius: 10px;">
                                     <div style="color: white"> S</div>
                                     <div class="profile-body" align="center">
                                         <h5>${utilisateur.name}</h5>
@@ -27,7 +27,7 @@
                                 </li>
                                 <hr>
                                 <li>
-                                    <a href="" style="color: black;">
+                                    <a href="/profil" style="color: black;">
                                         <i class="fa fa-user"></i> Mon Profil
                                     </a>
                                 </li>

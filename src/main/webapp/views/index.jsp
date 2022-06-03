@@ -87,7 +87,7 @@
                                             <div class="product">
                                                 <a href="/produit?id=${produit.id}">
                                                     <div class="product-img">
-                                                        <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                                        <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                                         <div class="product-label">
                                                             <span class="sale">-30%</span>
                                                             <c:if test="${produit.featured == true}">
@@ -213,7 +213,7 @@
                                             <div class="product">
                                                 <a href="/produit?id=${produit.id}">
                                                     <div class="product-img">
-                                                        <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                                        <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                                         <div class="product-label">
                                                             <span class="sale">-30%</span>
                                                             <c:if test="${produit.featured == true}">
@@ -285,7 +285,7 @@
                                 <c:forEach var="produit" items="${bestSales}" begin="0" end="2">
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                            <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category"><a href="/boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
@@ -300,7 +300,7 @@
                                 <c:forEach var="produit" items="${bestSales}" begin="3" end="5">
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                            <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category"><a href="/boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
@@ -326,7 +326,7 @@
                                 <c:forEach var="produit" items="${newProducts}" begin="0" end="2">
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                            <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category"><a href="/boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
@@ -341,7 +341,7 @@
                                 <c:forEach var="produit" items="${newProducts}" begin="3" end="5">
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                            <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category"><a href="//boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
@@ -369,7 +369,7 @@
                                 <c:forEach var="produit" items="${bestSales}" begin="6" end="8">
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                            <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category"><a href="/boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
@@ -384,7 +384,7 @@
                                 <c:forEach var="produit" items="${bestSales}" begin="9" end="11">
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                            <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category"><a href="//boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>

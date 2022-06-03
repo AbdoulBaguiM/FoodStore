@@ -81,7 +81,7 @@
                             <c:forEach var="produit" items="${bestSales}" begin="0" end="2">
                                 <div class="product-widget">
                                     <div class="product-img">
-                                        <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                        <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category"><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></p>
@@ -127,7 +127,7 @@
                                     <div class="product">
                                         <a href="/produit?id=${produit.id}">
                                             <div class="product-img">
-                                                <img src="/assets/img/${produit.photoPrincipale}" alt="">
+                                                <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                                 <div class="product-label">
                                                     <span class="sale">-30%</span>
                                                     <c:if test="${produit.featured == true}">
