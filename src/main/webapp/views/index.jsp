@@ -2,7 +2,7 @@
 
 <t:layout>
     <jsp:attribute name="title">
-      <title>FoodShop : Acceuil</title>
+        <title>FoodShop : Acceuil</title>
     </jsp:attribute>
 
     <jsp:body>
@@ -16,11 +16,11 @@
                     <div class="col-md-4 col-xs-6">
                         <div class="shop">
                             <div class="shop-img">
-                                <img src="/assets/img/shop01.png" alt="">
+                                <img src="/storage/categories/saladeMain.jpg" alt="">
                             </div>
                             <div class="shop-body">
-                                <h3>Laptop<br>Collection</h3>
-                                <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                                <h3>Nos<br>Entrees</h3>
+                                <a href="/boutique?id=1" class="cta-btn">Voir<i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -30,11 +30,11 @@
                     <div class="col-md-4 col-xs-6">
                         <div class="shop">
                             <div class="shop-img">
-                                <img src="/assets/img/shop03.png" alt="">
+                                <img src="/storage/categories/platMain.jpg" alt="">
                             </div>
                             <div class="shop-body">
-                                <h3>Accessories<br>Collection</h3>
-                                <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                                <h3>Nos<br>Plats</h3>
+                                <a href="/boutique?id=2" class="cta-btn">Voir<i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -44,11 +44,11 @@
                     <div class="col-md-4 col-xs-6">
                         <div class="shop">
                             <div class="shop-img">
-                                <img src="/assets/img/shop02.png" alt="">
+                                <img src="/storage/categories/dessertMain.jpg" alt="">
                             </div>
                             <div class="shop-body">
-                                <h3>Cameras<br>Collection</h3>
-                                <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                                <h3>Nos<br>Desserts</h3>
+                                <a href="/boutique?id=3" class="cta-btn">Voir <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -100,11 +100,9 @@
                                                         <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
                                                         <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
                                                         <div class="product-rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
+                                                            <c:forEach begin="1" end="5" var="star">
+                                                                <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
+                                                            </c:forEach>
                                                         </div>
                                                         <div class="product-btns">
                                                             <form>
@@ -142,6 +140,7 @@
 
         <!-- HOT DEAL SECTION -->
         <div id="hot-deal" class="section">
+            <input type="hidden" id="date_promotion" value="${datePromotion}">
             <!-- container -->
             <div class="container">
                 <!-- row -->
@@ -151,32 +150,32 @@
                             <ul class="hot-deal-countdown">
                                 <li>
                                     <div>
-                                        <h3>02</h3>
-                                        <span>Days</span>
+                                        <h3 id="days"></h3>
+                                        <span>Jours</span>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <h3>10</h3>
-                                        <span>Hours</span>
+                                        <h3 id="hours"></h3>
+                                        <span>Heures</span>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <h3>34</h3>
+                                        <h3 id="minutes"></h3>
                                         <span>Mins</span>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <h3>60</h3>
+                                        <h3 id="seconds"></h3>
                                         <span>Secs</span>
                                     </div>
                                 </li>
                             </ul>
-                            <h2 class="text-uppercase">hot deal this week</h2>
-                            <p>New Collection Up to 50% OFF</p>
-                            <a class="primary-btn cta-btn" href="#">Shop now</a>
+                            <h2 class="text-uppercase">Offres promotionnelles</h2>
+                            <p>Plus de 50% de reduction sur nos plats</p>
+                            <a class="primary-btn cta-btn" href="/boutique" id="buttonSeePromotions">Voir</a>
                         </div>
                     </div>
                 </div>
@@ -226,11 +225,9 @@
                                                         <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
                                                         <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
                                                         <div class="product-rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
+                                                            <c:forEach begin="1" end="5" var="star">
+                                                                <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
+                                                            </c:forEach>
                                                         </div>
                                                         <div class="product-btns">
                                                             <form>

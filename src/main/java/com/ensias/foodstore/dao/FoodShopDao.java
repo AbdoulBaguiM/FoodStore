@@ -2,10 +2,13 @@ package com.ensias.foodstore.dao;
 
 import com.ensias.foodstore.models.Categorie;
 import com.ensias.foodstore.models.Produit;
+import com.ensias.foodstore.models.Review;
+import com.ensias.foodstore.models.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +36,18 @@ public class FoodShopDao {
     // Get Categorie by id
     public static Categorie getCategory(int id) {
         Categorie categorie = new Categorie();
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        Session session = HibernateUtil.getInstance().getSessionFactory().getCurrentSession();
 
-        categorie = session.get(Categorie.class,id);
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Categorie where id = :id");
+            query.setParameter("id",id);
+            if(query.list().size()>0)
+                categorie = (Categorie) query.list().get(0);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
 
         return categorie;
     }
@@ -127,9 +139,20 @@ public class FoodShopDao {
     // Get a product by id
     public static Produit getProduct(int id) {
         Produit produit = new Produit();
-        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+        Session session = HibernateUtil.getInstance().getSessionFactory().getCurrentSession();
 
-        produit = session.get(Produit.class,id);
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Produit where id = :id");
+            query.setParameter("id",id);
+            if(query.list().size()>0)
+                produit = (Produit) query.list().get(0);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
+        produit.setCategorie(getCategory(produit.getCategorie().getId()));
 
         return produit;
     }
@@ -182,7 +205,119 @@ public class FoodShopDao {
     }
 
     public static String[] getCoveredCities() {
-        String[] cities = {"Agadir","Casablanca","Fes","Kenitra","Meknes","Oujda","Tanger"};
+        String[] cities = {"Agadir","Casablanca","Fes","Kenitra","Meknes","Oujda","Rabat","Salé","Tanger"};
         return cities;
+    }
+
+    public static List<Review> getReviewsForProduct(int productId) {
+        List<Review> reviews = new ArrayList<Review>();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("select r from Review r where r.produit.id = :idProduct");
+            query.setParameter("idProduct",productId);
+            reviews = query.list();
+            session.getTransaction().commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+
+        for(Review review:reviews)
+            review.setUser(FoodShopDao.getUserById(review.getUser().getId()));
+
+        return reviews;
+    }
+
+    private static User getUserById(Long userId) {
+        User user= new User();
+        Session session = HibernateUtil.getInstance().getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from User where id = :id");
+            query.setParameter("id",userId);
+            if(query.list().size()>0)
+                user = (User) query.list().get(0);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+
+    public static Review getReviewForProductByUser(Long userId, int productId) {
+        List<Review> reviews = new ArrayList<Review>();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("select r from Review r where r.user.id = :userId and r.produit.id = :produitId");
+            query.setParameter("userId",userId);
+            query.setParameter("produitId",productId);
+            reviews = query.list();
+            session.getTransaction().commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+
+        Review review = new Review();
+        if(reviews.size()>0) {
+            review = reviews.get(0);
+        } else {
+            review.setProduit(FoodShopDao.getProduct(productId));
+        }
+
+        review.setUser(FoodShopDao.getUserById(userId));
+        return review;
+    }
+
+    public static void saveOrUpdateReview(Review review) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+
+        if(review.getCreatedAt() == null)
+            review.setCreatedAt(Instant.now());
+
+        try {
+            session.beginTransaction();
+            session.saveOrUpdate(review);
+            session.getTransaction().commit();
+        } catch (HibernateException he) {
+            System.out.println("Error : " + he);
+            he.printStackTrace();
+        } finally {
+            if (session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
+
+    public static void updateProductRating(Produit produit, Review review) {
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            session.update(produit);
+            session.getTransaction().commit();
+        } catch (HibernateException he) {
+            System.out.println("Error : " + he);
+            he.printStackTrace();
+        } finally {
+            if (session.isOpen()){
+                session.close();
+            }
+        }
+
+    }
+
+    public static String getPromotionDateTime() {
+        return "2022-07-30T12:00:00";
     }
 }

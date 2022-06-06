@@ -46,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
         session.save(user);
         session.getTransaction().commit();
 
-        request.getSession().setAttribute("messageSucces","Votre compte a ete cree avec succes, veuillez vous connecter");
+        request.setAttribute("messageSucces","Votre compte a ete cree avec succes, veuillez vous connecter");
         request.setAttribute("categories",FoodShopDao.getAllCategories());
         request.getRequestDispatcher("/views/auth/signIn.jsp").forward(request, response);
     }

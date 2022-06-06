@@ -243,7 +243,7 @@
                                                                         <td rowspan="4"
                                                                             style="padding-right: 10px; padding-bottom: 10px;">
                                                                             <img style="height: 80px;"
-                                                                                 src="/assets/img/${commandeProduit.produit.photoPrincipale}"
+                                                                                 src="/storage/products/${commandeProduit.produit.photoPrincipale}"
                                                                                  alt="Product Image"/>
                                                                         </td>
                                                                         <td colspan="2"
@@ -286,7 +286,8 @@
                                                         <div class="order-product-item">
                                                             <div>
                                                                 <a href="/produit?id=${commandeProduit.produit.id}">
-                                                                    <img src="/assets/img/${commandeProduit.produit.photoPrincipale}"
+                                                                    <img
+                                                                            src="/storage/products/${commandeProduit.produit.photoPrincipale}"
                                                                          alt="Photo Produit">
                                                                 </a>
                                                             </div>

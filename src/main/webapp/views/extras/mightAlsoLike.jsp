@@ -31,11 +31,9 @@
                                 <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
                                 <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
                                 <div class="product-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    <c:forEach begin="1" end="5" var="star">
+                                        <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
+                                    </c:forEach>
                                 </div>
                                 <div class="product-btns">
                                     <form>

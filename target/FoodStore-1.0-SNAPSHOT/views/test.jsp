@@ -1,139 +1,346 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Hey</title>
 </head>
 <body>
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <%--@if (session()->has('success_message'))
+        <div class="alert alert-success">
+            {{ session()->get('success_message') }}
+        </div>
+        @endif
 
-<c:forEach var="commande" items="${commandes}">
-    <div class="order-container">
-        <div class="order-header">
-            <div class="order-header-items">
-                <div>
-                    <div class="uppercase font-bold">Date Commande</div>
-                    <div align="center">${commande.createdAt}</div>
-                </div>
-                <div>
-                    <div class="uppercase font-bold">Commande N°</div>
-                    <div align="center">${commande.id}</div>
-                </div>
-                <div>
-                    <div class="uppercase font-bold">Total</div>
-                    <div>${commande.CTotal} Dhs</div>
+        @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif--%>
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        <img src="/storage/products/${produit.photoPrincipale}" alt="">
+                    </div>
+                    <%--@if($produit->images)
+                    @foreach(json_decode($produit->images,true) as $image)
+                    <div class="product-preview">
+                        <img src="{{asset('storage/'.$image)}}" alt="">
+                    </div>
+                    @endforeach
+                    @endif--%>
+
                 </div>
             </div>
-            <div>
-                <div class="order-header-items">
-                    <div><a href="#${commande.id}" rel="modal:open">Details</a>
+            <!-- /Product main img -->
+
+            <!-- Product thumb imgs -->
+            <div class="col-md-2  col-md-pull-5">
+                <div id="product-imgs">
+                    <div class="product-preview">
+                        <img src="/storage/products/${produit.photoPrincipale}" alt="">
                     </div>
+                    <%--@if($produit->images)
+                    @foreach(json_decode($produit->images,true) as $image)
+                    <div class="product-preview">
+                        <img src="{{asset('storage/'.$image)}}" alt="">
+                    </div>
+                    @endforeach
+                    @endif--%>
                 </div>
             </div>
-        </div>
-        <div class="modal" id="${commande.id}">
-            <!-- Start address Section -->
-            <tr>
-                <td style="padding-top: 0;">
-                    <table align="center" cellpadding="0" cellspacing="0"
-                           border="0" class="devicewidthinner"
-                           style="border-bottom: 1px solid #bbbbbb;">
-                        <tbody>
-                        <tr>
-                            <td style="width: 55%; font-size: 16px; font-weight: bold; color: #666666; padding-bottom: 5px;">
-                                Adresse de Livraison
-                            </td>
-                            <td style="width: 45%; font-size: 16px; font-weight: bold; color: #666666; padding-bottom: 5px;">
-                                Informations Client
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 55%; font-size: 14px; line-height: 18px; color: #666666;">
-                                    ${commande.CAdresse}
-                            </td>
-                            <td style="width: 45%; font-size: 14px; line-height: 18px; color: #666666;">
-                                    ${commande.CNom} ${commande.CPrenom}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 55%; font-size: 14px; line-height: 18px; color: #666666;">
-                                    ${commande.CVille}, ${commande.CZipcode}
-                            </td>
-                            <td style="width: 45%; font-size: 14px; line-height: 18px; color: #666666;">
-                                    ${commande.CTelephone}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <!-- End address Section -->
+            <!-- /Product thumb imgs -->
 
-            <!-- Start product Section -->
-            <c:forEach var="commandeProduit"
-                       items="${commande.commandeProduits}">
-                <tr>
-                    <td style="padding-top: 0;">
-                        <table align="center" cellpadding="0" cellspacing="0"
-                               border="0" class="devicewidthinner"
-                               style="border-bottom: 1px solid #eeeeee;">
-                            <tbody>
-                            <tr>
-                                <td rowspan="4"
-                                    style="padding-right: 10px; padding-bottom: 10px;">
-                                    <img style="height: 80px;"
-                                         src="/assets/img/${commandeProduit.produit.photoPrincipale}"
-                                         alt="Product Image"/>
-                                </td>
-                                <td colspan="2"
-                                    style="font-size: 14px; font-weight: bold; color: #666666; padding-bottom: 5px;">
-                                        ${commandeProduit.produit.nom}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 14px; line-height: 18px; color: #757575; width: 440px;">
-                                    Quantité: ${commandeProduit.quantite}
-                                </td>
-                                <td style="width: 130px;"></td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 14px; line-height: 18px; color: #757575;"></td>
-                                <td style="font-size: 14px; line-height: 18px; color: #757575; text-align: right;">
-                                        ${commandeProduit.quantite}
-                                    x ${commandeProduit.produit.prixHt} DHS
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </c:forEach>
-            <!-- End product Section -->
-
-            <a class="secondary-btn" href="#" rel="modal:close"
-               style="margin-left: 70%">Fermer</a>
-        </div>
-        <div class="order-products">
-            <c:forEach var="commandeProduit"
-                       items="${commande.commandeProduits}">
-                <div class="order-product-item">
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">${produit.nom}</h2>
                     <div>
-                        <a href="/produit?id=${commandeProduit.produit.id}">
-                            <img src="/assets/img/${commandeProduit.produit.photoPrincipale}"
-                                 alt="Photo Produit">
-                        </a>
-                    </div>
-                    <div>
-                        <div>
-                            <a href="/produit?id=${commandeProduit.produit.id}">${commandeProduit.produit.nom}</a>
+                        <div class="product-rating">
+                            <c:forEach begin="1" end="5" var="star">
+                                <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
+                            </c:forEach>
                         </div>
-                        <div>${commandeProduit.produit.prixHt} Dhs</div>
-                        <div>Quantité: ${commandeProduit.quantite}</div>
+                        <a class="review-link" href="#">${produit.reviews.size()} Review(s) | Ajouter une note</a>
                     </div>
+                    <div>
+                        <h3 class="product-price">${produit.prixHt} Dhs
+                            <%--@if(getProductDelPrice($produit))
+                            <del class="product-old-price"> {{getProductDelPrice($produit)}} Dhs</del>
+                            @endif--%>
+                        </h3>
+                        <span class="product-available">
+                                <c:choose>
+                                    <c:when test="${produit.quantite > 5}">
+                                        <span style="color: forestgreen">En Stock</span>
+                                    </c:when>
+                                    <c:when test="${produit.quantite >= 1}">
+                                        <span style="color: darkorange">Stock Faible</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span style="color: red">Epuise</span>
+                                    </c:otherwise>
+                                </c:choose>
+                                </span>
+                    </div>
+                    <p>${produit.details}</p>
+
+                    <c:if test="${produit.quantite > 0}">
+                        <div class="add-to-cart">
+                            <div class="qty-label" style="width: 20%;">
+                                <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[${produit.id}]">
+                                                        <span class="glyphicon glyphicon-minus"></span>
+                                                    </button>
+                                                </span>
+                                    <input type="text" name="quant[${produit.id}]" class="form-control input-number" value="1" min="1" max="${produit.quantite}" style="width: 65px;text-align: center" form="add_to_cart" >
+                                    <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[${produit.id}]">
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                    </button>
+                                                </span>
+                                </div>
+                            </div>
+                            <p></p>
+
+                            <button  style="display: none">
+                                <form action="/panier" method="POST" id="add_to_cart">
+                                    <input type="hidden" name="action" value="update">
+                                    <input type="hidden" name="id" value="${produit.id}">
+                                    <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Ajouter au Panier</button>
+                                </form>
+                            </button>
+                        </div>
+                    </c:if>
+
+                    <ul class="product-btns">
+                        <li>
+                            <form action="#" method="POST">
+                                <input type="hidden" name="id" value="${produit.id}">
+                                <input type="hidden" name="nom" value="${produit.nom}">
+                                <input type="hidden" name="prix_ht" value="${produit.prixHt}">
+                                <button class="unstyled-button" type="submit" style="font-weight: 500;text-transform: uppercase;"><i class="fa fa-heart-o"></i> Ajouter a ma Wishlist</button>
+                            </form>
+                        </li>
+                    </ul>
+
+                    <ul class="product-links">
+                        <li>Categorie :</li>
+
+                        <li><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></li>
+
+                    </ul>
+
+                    <ul class="product-links">
+                        <li>Partager :</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+
                 </div>
-            </c:forEach>
+            </div>
+            <!-- /Product details -->
+
+            <!-- Product tab -->
+            <div class="col-md-12">
+                <div id="product-tab">
+                    <!-- product tab nav -->
+                    <ul class="tab-nav">
+                        <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+                        <li><a data-toggle="tab" href="#tab2">Details</a></li>
+                        <li><a data-toggle="tab" href="#tab3">Reviews (${produit.reviews.size()})</a></li>
+                    </ul>
+                    <!-- /product tab nav -->
+
+                    <!-- product tab content -->
+                    <div class="tab-content">
+                        <!-- tab1  -->
+                        <div id="tab1" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    ${produit.description}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab1  -->
+
+                        <!-- tab2  -->
+                        <div id="tab2" class="tab-pane fade in">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p align="center">${produit.details}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab2  -->
+
+                        <!-- tab3  -->
+                        <div id="tab3" class="tab-pane fade in">
+                            <div class="row">
+                                <!-- Rating -->
+                                <div class="col-md-3">
+                                    <div id="rating">
+                                        <div class="rating-avg">
+                                            <span>${produit.ratingCache}</span>
+                                            <div class="product-rating">
+                                                <c:forEach begin="1" end="5" var="star">
+                                                    <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                        <%--<ul class="rating">
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: {{$reviewDetails['widthR'][5]}}%;"></div>
+                                                </div>
+                                                <span class="sum">{{$reviewDetails['countR'][5]}}</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: {{$reviewDetails['widthR'][4]}}%;"></div>
+                                                </div>
+                                                <span class="sum">{{$reviewDetails['countR'][4]}}</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: {{$reviewDetails['widthR'][3]}}%;"></div>
+                                                </div>
+                                                <span class="sum">{{$reviewDetails['countR'][3]}}</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: {{$reviewDetails['widthR'][2]}}%;"></div>
+                                                </div>
+                                                <span class="sum">{{$reviewDetails['countR'][2]}}</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width:{{$reviewDetails['widthR'][1]}}%;"></div>
+                                                </div>
+                                                <span class="sum">{{$reviewDetails['countR'][1]}}</span>
+                                            </li>
+                                        </ul>--%>
+                                    </div>
+                                </div>
+                                <!-- /Rating -->
+
+                                <%--<!-- Reviews -->
+                                <div class="col-md-6">
+                                    <div id="reviews">
+                                        <ul class="reviews">
+                                            <c:choose>
+                                                <c:when test="${reviews.size() > 0}">
+                                                    <c:forEach var="review" items="${reviews}">
+                                                        <li>
+                                                        <div class="review-heading">
+                                                            <h5 class="name">${review.user.name}</h5>
+                                                            <p class="date">${review.updatedAt}</p>
+                                                            <div class="review-rating">
+                                                                <c:forEach begin="1" end="5" var="star">
+                                                                    <i class="fa fa-star${review.note >= star ? '' : '-o empty'}"></i>
+                                                                </c:forEach>
+                                                            </div>
+                                                        </div>
+                                                        <div class="review-body">
+                                                            <p>${review.message}</p>
+                                                            <c:if test="${review.statut}">
+                                                                <p align="right" style="color: lawngreen;font-size: small"><i class="fa fa-check-circle-o"></i> Achat verifie</p>
+                                                            </c:if>
+                                                        </div>
+                                                    </c:forEach>
+                                                    </li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li><p>Aucune note pour ce produit, soyez le premier</p></li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /Reviews -->--%>
+
+                                <!-- Review Form -->
+                                <div class="col-md-3">
+                                    <div id="review-form">
+                                        <form class="review-form" action="/produit" method="POST">
+                                            <input name="id" type="hidden" value="${produit.id}">
+                                            <input class="input" name="nom" type="text" value="${utilisateur.name}" placeholder="Nom" required>
+                                            <input class="input" name="mail" type="email" value="${utilisateur.email}" placeholder="Email" required>
+                                            <textarea class="input" name="commentaire" placeholder="Commentaire" required></textarea>
+                                            <div class="input-rating">
+                                                <span>Note: </span>
+                                                <div class="stars">
+                                                    <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+                                                    <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+                                                    <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+                                                    <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+                                                    <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                                </div>
+                                            </div>
+                                            <button class="primary-btn" type="submit">Envoyer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- /Review Form -->
+                            </div>
+                        </div>
+                        <!-- /tab3  -->
+                    </div>
+                    <!-- /product tab content  -->
+                </div>
+            </div>
+            <!-- /product tab -->
         </div>
+        <!-- /row -->
     </div>
-    <!-- end order-container -->
-</c:forEach>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
 </body>
 </html>

@@ -10,21 +10,17 @@
         <div class="section">
             <!-- container -->
             <div class="container">
-                <%--@if (session()->has('success_message'))
-                <div class="alert alert-success">
-                    {{ session()->get('success_message') }}
-                </div>
-                @endif
+                <c:if test="${messageSucces != null}">
+                    <div class="alert alert-success">
+                            ${messageSucces}
+                    </div>
+                </c:if>
 
-                @if(count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif--%>
+                <c:if test="${messageErreur != null}">
+                    <div class="alert alert-danger">
+                            ${messageErreur}
+                    </div>
+                </c:if>
                 <!-- row -->
                 <div class="row">
                     <!-- Product main img -->
@@ -68,11 +64,11 @@
                             <h2 class="product-name">${produit.nom}</h2>
                             <div>
                                 <div class="product-rating">
-                                    <%--@foreach(range(1,5) as $star)
-                                    <i class="fa fa-star{{$produit->rating_cache >= $star ? '' : '-o empty'}}"></i>
-                                    @endforeach--%>
+                                    <c:forEach begin="1" end="5" var="star">
+                                        <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
+                                    </c:forEach>
                                 </div>
-                                <%--<a class="review-link" href="#">{{$produit->reviews()->count()}} Review(s) | Ajouter une note</a>--%>
+                                <a class="review-link" href="#">${produit.reviews.size()} Review(s) | Ajouter une note</a>
                             </div>
                             <div>
                                 <h3 class="product-price">${produit.prixHt} Dhs
@@ -162,7 +158,7 @@
                             <ul class="tab-nav">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
                                 <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                                <%--<li><a data-toggle="tab" href="#tab3">Reviews ({{$produit->reviews()->count()}})</a></li>--%>
+                                <li><a data-toggle="tab" href="#tab3">Reviews (${produit.reviews.size()})</a></li>
                             </ul>
                             <!-- /product tab nav -->
 
@@ -188,88 +184,20 @@
                                 </div>
                                 <!-- /tab2  -->
 
-                               <%-- <!-- tab3  -->
+                                <!-- tab3  -->
                                 <div id="tab3" class="tab-pane fade in">
                                     <div class="row">
                                         <!-- Rating -->
                                         <div class="col-md-3">
                                             <div id="rating">
                                                 <div class="rating-avg">
-                                                    <span>{{$produit->rating_cache}}</span>
-                                                    <div class="rating-stars">
-                                                        @foreach(range(1,5) as $star)
-                                                        <i class="fa fa-star{{$produit->rating_cache >= $star ? '' : '-o empty'}}"></i>
-                                                        @endforeach
-
+                                                    <span>${produit.ratingCache}</span>
+                                                    <div class="product-rating">
+                                                        <c:forEach begin="1" end="5" var="star">
+                                                            <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
-                                                <ul class="rating">
-                                                    <li>
-                                                        <div class="rating-stars">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                        <div class="rating-progress">
-                                                            <div style="width: {{$reviewDetails['widthR'][5]}}%;"></div>
-                                                        </div>
-                                                        <span class="sum">{{$reviewDetails['countR'][5]}}</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="rating-stars">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </div>
-                                                        <div class="rating-progress">
-                                                            <div style="width: {{$reviewDetails['widthR'][4]}}%;"></div>
-                                                        </div>
-                                                        <span class="sum">{{$reviewDetails['countR'][4]}}</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="rating-stars">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </div>
-                                                        <div class="rating-progress">
-                                                            <div style="width: {{$reviewDetails['widthR'][3]}}%;"></div>
-                                                        </div>
-                                                        <span class="sum">{{$reviewDetails['countR'][3]}}</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="rating-stars">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </div>
-                                                        <div class="rating-progress">
-                                                            <div style="width: {{$reviewDetails['widthR'][2]}}%;"></div>
-                                                        </div>
-                                                        <span class="sum">{{$reviewDetails['countR'][2]}}</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="rating-stars">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </div>
-                                                        <div class="rating-progress">
-                                                            <div style="width:{{$reviewDetails['widthR'][1]}}%;"></div>
-                                                        </div>
-                                                        <span class="sum">{{$reviewDetails['countR'][1]}}</span>
-                                                    </li>
-                                                </ul>
                                             </div>
                                         </div>
                                         <!-- /Rating -->
@@ -278,32 +206,33 @@
                                         <div class="col-md-6">
                                             <div id="reviews">
                                                 <ul class="reviews">
-                                                    @forelse($reviews as $review)
-
-                                                    <li>
-                                                        <div class="review-heading">
-                                                            <h5 class="name">{{$review->user->name}}</h5>
-                                                            <p class="date">{{presentDate($review->updated_at)}}</p>
-                                                            <div class="review-rating">
-                                                                @foreach(range(1,5) as $star)
-                                                                <i class="fa fa-star{{$review->note >= $star ? '' : '-o empty'}}"></i>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-body">
-                                                            <p>{{$review->message}}</p>
-                                                            @if($review->statut)
-                                                            <p align="right" style="color: lawngreen;font-size: small"><i class="fa fa-check-circle-o"></i> Achat vérifié</p>
-                                                            @endif
-                                                        </div>
-                                                    </li>
-                                                    @empty
-                                                    <li><p>Aucune note pour ce produit, soyez le premier</p></li>
-                                                    @endforelse
-
+                                                    <c:choose>
+                                                        <c:when test="${reviews.size() > 0}">
+                                                            <c:forEach var="review" items="${reviews}">
+                                                            <li>
+                                                                <div class="review-heading">
+                                                                    <h5 class="name">${review.user.name}</h5>
+                                                                    <p class="date">${review.updatedAt}</p>
+                                                                    <div class="review-rating">
+                                                                        <c:forEach begin="1" end="5" var="star">
+                                                                            <i class="fa fa-star${review.note >= star ? '' : '-o empty'}"></i>
+                                                                        </c:forEach>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="review-body">
+                                                                    <p>${review.message}</p>
+                                                                    <c:if test="${review.statut}">
+                                                                        <p align="right" style="color: lawngreen;font-size: small"><i class="fa fa-check-circle-o"></i> Achat verifie</p>
+                                                                    </c:if>
+                                                                </div>
+                                                            </c:forEach>
+                                                            </li>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <li><p>Aucune note pour ce produit, soyez le premier</p></li>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </ul>
-
-                                                {{$reviews->appends(request()->input())->links("pagination::bootstrap-4")}}
                                             </div>
                                         </div>
                                         <!-- /Reviews -->
@@ -311,12 +240,11 @@
                                         <!-- Review Form -->
                                         <div class="col-md-3">
                                             <div id="review-form">
-                                                <form class="review-form" action="{{route('ajouter_review')}}" method="POST">
-                                                    @csrf
-                                                    <input name="id" type="hidden" value="{{$produit->id}}">
-                                                    <input class="input" name="nom" type="text" value="{{auth()->user()? auth()->user()->name : null}}" placeholder="Nom">
-                                                    <input class="input" name="email" type="email" value="{{auth()->user()? auth()->user()->email : null}}" placeholder="Email">
-                                                    <textarea class="input" name="commentaire" placeholder="Commentaire"></textarea>
+                                                <form class="review-form" action="/produit" method="POST">
+                                                    <input name="id" type="hidden" value="${produit.id}">
+                                                    <input class="input" name="nom" type="text" value="${utilisateur != null ? utilisateur.name : null}" placeholder="Nom" readonly>
+                                                    <input class="input" name="mail" type="email" value="${utilisateur != null ? utilisateur.email : null}" placeholder="Email" readonly>
+                                                    <textarea class="input" name="commentaire" placeholder="Commentaire" required></textarea>
                                                     <div class="input-rating">
                                                         <span>Note: </span>
                                                         <div class="stars">
@@ -334,7 +262,7 @@
                                         <!-- /Review Form -->
                                     </div>
                                 </div>
-                                <!-- /tab3  -->--%>
+                                <!-- /tab3  -->
                             </div>
                             <!-- /product tab content  -->
                         </div>
