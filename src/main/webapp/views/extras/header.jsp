@@ -108,12 +108,15 @@
                                             <c:forEach var="lignePanier" items="${panier.items}">
                                                 <div class="product-widget">
                                                     <div class="product-img">
-                                                        <img
-                                                                src="/storage/products${lignePanier.produit.photoPrincipale}" alt="">
+                                                        <img src="/storage/products/${lignePanier.produit.photoPrincipale}" alt="">
                                                     </div>
                                                     <div class="product-body">
                                                         <h3 class="product-name"><a href="/produit?id=${lignePanier.produit.id}">${lignePanier.produit.nom}</a></h3>
-                                                        <h4 class="product-price"><span class="qty">${lignePanier.quantite}x</span>${lignePanier.produit.prixHt} DHS</h4>
+                                                        <h4 class="product-price"><span
+                                                                class="qty">${lignePanier.quantite}x</span
+                                                        >${lignePanier.produit.prixPromo != null ?
+                                                        lignePanier.produit.prixPromo : lignePanier.produit.prixHt}
+                                                            DHS</h4>
                                                     </div>
                                                     <form action="/panier" method="POST">
                                                         <input type="hidden" name="action" value="supprimer">

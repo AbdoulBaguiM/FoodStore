@@ -71,11 +71,14 @@
                                 <a class="review-link" href="#">${produit.reviews.size()} Review(s) | Ajouter une note</a>
                             </div>
                             <div>
-                                <h3 class="product-price">${produit.prixHt} Dhs
-                                    <%--@if(getProductDelPrice($produit))
-                                    <del class="product-old-price"> {{getProductDelPrice($produit)}} Dhs</del>
-                                    @endif--%>
-                                </h3>
+                                <c:choose>
+                                    <c:when test="${produit.prixPromo != null}">
+                                        <h3 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3 class="product-price">${produit.prixHt} DHS</h3>
+                                    </c:otherwise>
+                                </c:choose>
                                 <span class="product-available">
                                 <c:choose>
                                     <c:when test="${produit.quantite > 5}">

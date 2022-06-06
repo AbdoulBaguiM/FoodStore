@@ -1,5 +1,6 @@
 package com.ensias.foodstore.models;
 
+import com.ensias.foodstore.dao.FoodShopDao;
 import com.ensias.foodstore.dao.HibernateUtil;
 import org.hibernate.Session;
 
@@ -28,8 +29,7 @@ public class Panier {
             }
 
         if (flag) {
-            Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-            Produit produit = session.get(Produit.class,produitId);
+            Produit produit = FoodShopDao.getProduct(produitId);
             LignePanier lignePanier = new LignePanier(produit, quantite);
             items.add(lignePanier);
         }
@@ -55,8 +55,7 @@ public class Panier {
             }
 
         if (flag) {
-            Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
-            Produit produit = session.get(Produit.class,produitId);
+            Produit produit = FoodShopDao.getProduct(produitId);
             LignePanier lignePanier = new LignePanier(produit, quantite);
             items.add(lignePanier);
         }
@@ -66,13 +65,16 @@ public class Panier {
         double total = 0;
 
         for(LignePanier lignePanier:items) {
-            total+=lignePanier.getProduit().getPrixHt()*lignePanier.getQuantite();
+            if(lignePanier.getProduit().getPrixPromo() != null)
+                total+=lignePanier.getProduit().getPrixPromo()*lignePanier.getQuantite();
+            else
+                total+=lignePanier.getProduit().getPrixHt()*lignePanier.getQuantite();
         }
         return total;
     }
 
     public double fraixLivraison() {
-        double frais = 10;
+        double frais = 10.00;
         return frais;
     }
 }

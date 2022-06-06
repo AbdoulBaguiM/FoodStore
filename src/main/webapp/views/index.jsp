@@ -89,7 +89,10 @@
                                                     <div class="product-img">
                                                         <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                                         <div class="product-label">
-                                                            <span class="sale">-30%</span>
+                                                            <c:if test="${produit.promotion != null}">
+                                                                <span class="sale">-${produit.promotion.percentOff}%</span>
+                                                            </c:if>
+
                                                             <c:if test="${produit.featured == true}">
                                                                 <span class="new">NEW</span>
                                                             </c:if>
@@ -98,7 +101,16 @@
                                                     <div class="product-body">
                                                         <p class="product-category"><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></p>
                                                         <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                                        <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                                        <c:choose>
+                                                            <c:when test="${produit.prixPromo != null}">
+                                                                <h4 class="product-price">${produit.prixPromo} DHS<del
+                                                                        class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                                            </c:otherwise>
+                                                        </c:choose>
+
                                                         <div class="product-rating">
                                                             <c:forEach begin="1" end="5" var="star">
                                                                 <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
@@ -214,7 +226,10 @@
                                                     <div class="product-img">
                                                         <img src="/storage/products/${produit.photoPrincipale}" alt="">
                                                         <div class="product-label">
-                                                            <span class="sale">-30%</span>
+                                                            <c:if test="${produit.promotion != null}">
+                                                                <span class="sale">-${produit.promotion.percentOff}%</span>
+                                                            </c:if>
+
                                                             <c:if test="${produit.featured == true}">
                                                                 <span class="new">NEW</span>
                                                             </c:if>
@@ -223,7 +238,14 @@
                                                     <div class="product-body">
                                                         <p class="product-category"><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></p>
                                                         <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                                        <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                                        <c:choose>
+                                                            <c:when test="${produit.prixPromo != null}">
+                                                                <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                         <div class="product-rating">
                                                             <c:forEach begin="1" end="5" var="star">
                                                                 <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
@@ -287,7 +309,14 @@
                                         <div class="product-body">
                                             <p class="product-category"><a href="/boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
                                             <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                            <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                            <c:choose>
+                                                <c:when test="${produit.prixPromo != null}">
+                                                    <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -302,7 +331,14 @@
                                         <div class="product-body">
                                             <p class="product-category"><a href="/boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
                                             <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                            <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                            <c:choose>
+                                                <c:when test="${produit.prixPromo != null}">
+                                                    <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -328,7 +364,14 @@
                                         <div class="product-body">
                                             <p class="product-category"><a href="/boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
                                             <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                            <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                            <c:choose>
+                                                <c:when test="${produit.prixPromo != null}">
+                                                    <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -343,7 +386,14 @@
                                         <div class="product-body">
                                             <p class="product-category"><a href="//boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
                                             <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                            <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                            <c:choose>
+                                                <c:when test="${produit.prixPromo != null}">
+                                                    <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -371,7 +421,14 @@
                                         <div class="product-body">
                                             <p class="product-category"><a href="/boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
                                             <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                            <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                            <c:choose>
+                                                <c:when test="${produit.prixPromo != null}">
+                                                    <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -386,7 +443,14 @@
                                         <div class="product-body">
                                             <p class="product-category"><a href="//boutique?id=${produit.categorie.id}&query=">${produit.categorie.nom}</a></p>
                                             <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                            <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                            <c:choose>
+                                                <c:when test="${produit.prixPromo != null}">
+                                                    <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </c:forEach>

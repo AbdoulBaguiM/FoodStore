@@ -243,7 +243,7 @@
                                                                         <td rowspan="4"
                                                                             style="padding-right: 10px; padding-bottom: 10px;">
                                                                             <img style="height: 80px;"
-                                                                                 src="/assets/img/${commandeProduit.produit.photoPrincipale}"
+                                                                                 src="/storage/products/${commandeProduit.produit.photoPrincipale}"
                                                                                  alt="Product Image"/>
                                                                         </td>
                                                                         <td colspan="2"
@@ -261,7 +261,9 @@
                                                                         <td style="font-size: 14px; line-height: 18px; color: #757575;"></td>
                                                                         <td style="font-size: 14px; line-height: 18px; color: #757575; text-align: right;">
                                                                                 ${commandeProduit.quantite}
-                                                                            x ${commandeProduit.produit.prixHt} DHS
+                                                                            x ${commandeProduit.produit.prixPromo !=
+                                                                            null ? commandeProduit.produit.prixPromo
+                                                                            : commandeProduit.produit.prixHt} DHS
                                                                         </td>
                                                                     </tr>
                                                                     </tbody>
@@ -286,7 +288,8 @@
                                                         <div class="order-product-item">
                                                             <div>
                                                                 <a href="/produit?id=${commandeProduit.produit.id}">
-                                                                    <img src="/assets/img/${commandeProduit.produit.photoPrincipale}"
+                                                                    <img
+                                                                            src="/storage/products/${commandeProduit.produit.photoPrincipale}"
                                                                          alt="Photo Produit">
                                                                 </a>
                                                             </div>
@@ -294,7 +297,9 @@
                                                                 <div>
                                                                     <a href="/produit?id=${commandeProduit.produit.id}">${commandeProduit.produit.nom}</a>
                                                                 </div>
-                                                                <div>${commandeProduit.produit.prixHt} Dhs</div>
+                                                                <div>${commandeProduit.produit.prixPromo !=
+                                                                        null ? commandeProduit.produit.prixPromo
+                                                                        : commandeProduit.produit.prixHt} Dhs</div>
                                                                 <div>Quantite: ${commandeProduit.quantite}</div>
                                                             </div>
                                                         </div>

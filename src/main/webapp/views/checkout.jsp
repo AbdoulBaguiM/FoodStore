@@ -84,7 +84,10 @@
                                 <c:forEach var="lignePanier" items="${panier.items}">
                                 <div class="order-col">
                                     <div>${lignePanier.produit.nom} (x${lignePanier.quantite})</div>
-                                    <div>${lignePanier.quantite * lignePanier.produit.prixHt} DHS</div>
+                                    <div>${lignePanier.produit.prixPromo != null ?
+                                            lignePanier.produit.prixPromo : lignePanier.produit.prixHt *
+                                            lignePanier.quantite}
+                                            DHS</div>
                                 </div>
                                 </c:forEach>
                             </div>

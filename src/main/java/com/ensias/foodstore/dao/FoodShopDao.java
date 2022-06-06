@@ -1,9 +1,6 @@
 package com.ensias.foodstore.dao;
 
-import com.ensias.foodstore.models.Categorie;
-import com.ensias.foodstore.models.Produit;
-import com.ensias.foodstore.models.Review;
-import com.ensias.foodstore.models.User;
+import com.ensias.foodstore.models.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -64,10 +61,35 @@ public class FoodShopDao {
         } finally {
             session.close();
         }
-        for(Produit produit:produits)
+        for(Produit produit:produits){
             produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+
+        }
 
         return produits;
+    }
+
+    // Get promotion by Id
+    private static Promotion getPromotionById(Integer id) {
+        Promotion promotion = new Promotion();
+        Session session = HibernateUtil.getInstance().getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Promotion where id = :id");
+            query.setParameter("id",id);
+            if(query.list().size()>0)
+                promotion = (Promotion) query.list().get(0);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
+        return promotion;
     }
 
     // Get all featured products
@@ -84,8 +106,13 @@ public class FoodShopDao {
             session.close();
         }
 
-        for(Produit produit:nouveauxProduits)
+        for(Produit produit:nouveauxProduits){
             produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+        }
 
         return nouveauxProduits;
     }
@@ -107,8 +134,13 @@ public class FoodShopDao {
             session.close();
         }
 
-        for(Produit produit:bestSales)
+        for(Produit produit:bestSales){
             produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+        }
 
         return bestSales;
     }
@@ -130,8 +162,13 @@ public class FoodShopDao {
             session.close();
         }
 
-        for(Produit produit:searchresult)
+        for(Produit produit:searchresult){
             produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+        }
 
         return searchresult;
     }
@@ -153,6 +190,10 @@ public class FoodShopDao {
         }
 
         produit.setCategorie(getCategory(produit.getCategorie().getId()));
+        if(produit.getPromotion() != null){
+            produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+            produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+        }
 
         return produit;
     }
@@ -176,8 +217,14 @@ public class FoodShopDao {
         finally {
             session.close();
         }
-        for(Produit produit:produits)
+
+        for(Produit produit:produits){
             produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+        }
 
         return produits;
     }
@@ -198,8 +245,13 @@ public class FoodShopDao {
         finally {
             session.close();
         }
-        for(Produit produit:produits)
+        for(Produit produit:produits){
             produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+        }
 
         return produits;
     }

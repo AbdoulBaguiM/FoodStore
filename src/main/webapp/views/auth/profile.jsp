@@ -261,7 +261,9 @@
                                                                         <td style="font-size: 14px; line-height: 18px; color: #757575;"></td>
                                                                         <td style="font-size: 14px; line-height: 18px; color: #757575; text-align: right;">
                                                                                 ${commandeProduit.quantite}
-                                                                            x ${commandeProduit.produit.prixHt} DHS
+                                                                            x ${commandeProduit.produit.prixPromo !=
+                                                                            null ? commandeProduit.produit.prixPromo
+                                                                            : commandeProduit.produit.prixHt} DHS
                                                                         </td>
                                                                     </tr>
                                                                     </tbody>
@@ -295,7 +297,9 @@
                                                                 <div>
                                                                     <a href="/produit?id=${commandeProduit.produit.id}">${commandeProduit.produit.nom}</a>
                                                                 </div>
-                                                                <div>${commandeProduit.produit.prixHt} Dhs</div>
+                                                                <div>${commandeProduit.produit.prixPromo !=
+                                                                        null ? commandeProduit.produit.prixPromo
+                                                                        : commandeProduit.produit.prixHt} Dhs</div>
                                                                 <div>Quantite: ${commandeProduit.quantite}</div>
                                                             </div>
                                                         </div>

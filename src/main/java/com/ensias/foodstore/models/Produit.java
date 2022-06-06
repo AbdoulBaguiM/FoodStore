@@ -20,6 +20,9 @@ public class Produit {
     @Column(name = "prix_ht", nullable = false)
     private Double prixHt;
 
+    @Transient
+    private Double prixPromo;
+
     @Lob
     @Column(name = "details", nullable = false)
     private String details;
@@ -94,6 +97,14 @@ public class Produit {
 
     public void setPrixHt(Double prixHt) {
         this.prixHt = prixHt;
+    }
+
+    public Double getPrixPromo() {
+        return prixPromo;
+    }
+
+    public void setPrixPromo(Double prixPromo) {
+        this.prixPromo = prixPromo;
     }
 
     public String getDetails() {

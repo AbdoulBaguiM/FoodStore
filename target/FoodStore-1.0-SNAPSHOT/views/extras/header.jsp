@@ -4,8 +4,8 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +212-662-158-998</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> foodshop.contact@gmail.com</a></li>
+                <li><a href="tel:"><i class="fa fa-phone"></i> +212-662-158-998</a></li>
+                <li><a href="mailto:"><i class="fa fa-envelope-o"></i> foodshop.contact@gmail.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 67, Agdal, Rue Khalil - Rabat</a></li>
             </ul>
             <ul class="header-links pull-right">
@@ -62,7 +62,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="/" class="logo">
-                            <img src="/assets/ginfo/logo.png" alt="" width="169" height="70">
+                            <img src="/storage/logo.png" alt="" width="169" height="70">
                         </a>
                     </div>
                 </div>
@@ -108,11 +108,15 @@
                                             <c:forEach var="lignePanier" items="${panier.items}">
                                                 <div class="product-widget">
                                                     <div class="product-img">
-                                                        <img src="/assets/img/${lignePanier.produit.photoPrincipale}" alt="">
+                                                        <img src="/storage/products/${lignePanier.produit.photoPrincipale}" alt="">
                                                     </div>
                                                     <div class="product-body">
                                                         <h3 class="product-name"><a href="/produit?id=${lignePanier.produit.id}">${lignePanier.produit.nom}</a></h3>
-                                                        <h4 class="product-price"><span class="qty">${lignePanier.quantite}x</span>${lignePanier.produit.prixHt} DHS</h4>
+                                                        <h4 class="product-price"><span
+                                                                class="qty">${lignePanier.quantite}x</span
+                                                        >${lignePanier.produit.prixPromo != null ?
+                                                        lignePanier.produit.prixPromo : lignePanier.produit.prixHt}
+                                                            DHS</h4>
                                                     </div>
                                                     <form action="/panier" method="POST">
                                                         <input type="hidden" name="action" value="supprimer">
