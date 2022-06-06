@@ -372,4 +372,30 @@ public class FoodShopDao {
     public static String getPromotionDateTime() {
         return "2022-07-30T12:00:00";
     }
+
+    public static List<Produit> getProductsInPromotion() {
+        List<Produit> produits = new ArrayList<Produit>();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            produits = session.createQuery("select p from Produit as p where p.promotion.id is not null").list();
+            session.getTransaction().commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+
+        for(Produit produit:produits){
+            produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+        }
+
+        return produits;
+    }
 }

@@ -187,7 +187,7 @@
                             </ul>
                             <h2 class="text-uppercase">Offres promotionnelles</h2>
                             <p>Plus de 50% de reduction sur nos plats</p>
-                            <a class="primary-btn cta-btn" href="/boutique" id="buttonSeePromotions">Voir</a>
+                            <a class="primary-btn cta-btn" href="/promotions" id="buttonSeePromotions">Voir</a>
                         </div>
                     </div>
                 </div>

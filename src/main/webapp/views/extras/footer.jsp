@@ -36,7 +36,7 @@
                         <h3 class="footer-title">Information</h3>
                         <ul class="footer-links">
                             <li><a href="#">Qui sommes-nous</a></li>
-                            <li><a href="#">Contactez-nous</a></li>
+                            <li><a href="/contactez-nous">Contactez-nous</a></li>
                             <li><a href="#">Commandes et Retours</a></li>
                             <li><a href="#">Politique de Confidentialite</a></li>
                         </ul>

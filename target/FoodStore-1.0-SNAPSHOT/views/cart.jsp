@@ -49,7 +49,9 @@
                                                             <option ${lignePanier.quantite == myIndex.index ? 'selected' : ''}> ${myIndex.index}</option>
                                                         </c:forEach>
                                                     </select>
-                                                    x ${lignePanier.produit.prixHt} Dhs
+                                                    x ${lignePanier.produit.prixPromo != null ?
+                                                        lignePanier.produit.prixPromo : lignePanier.produit.prixHt}
+                                                    Dhs
                                                 </p>
                                                 <p class="stockStatus">
                                                     <c:choose>
@@ -67,7 +69,9 @@
                                             </div>
                                             <div class="cell2">
                                                 <div class="prodTotal cartSection">
-                                                    <p>${lignePanier.produit.prixHt * lignePanier.quantite} DHS</p>
+                                                    <p>${lignePanier.produit.prixPromo != null ?
+                                                            lignePanier.produit.prixPromo :
+                                                            lignePanier.produit.prixHt * lignePanier.quantite} DHS</p>
                                                     <div class="cartSection removeWrap">
                                                         <form action="/panier" method="POST">
                                                             <input type="hidden" name="action" value="supprimer">
