@@ -20,7 +20,7 @@
                             </div>
                             <div class="shop-body">
                                 <h3>Nos<br>Entrees</h3>
-                                <a href="/boutique?id=1" class="cta-btn">Voir<i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="/boutique?id=1" class="cta-btn">Voir <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="shop-body">
                                 <h3>Nos<br>Plats</h3>
-                                <a href="/boutique?id=2" class="cta-btn">Voir<i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="/boutique?id=2" class="cta-btn">Voir <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -116,11 +116,11 @@
                                                                 <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
                                                             </c:forEach>
                                                         </div>
-                                                        <div class="product-btns">
+                                                        <%--<div class="product-btns">
                                                             <form>
                                                                 <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Ajouter a la wishlist</span></button>
                                                             </form>
-                                                        </div>
+                                                        </div>--%>
                                                     </div>
                                                     <c:if test="${produit.quantite>0}">
                                                         <div class="add-to-cart">
@@ -251,11 +251,11 @@
                                                                 <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
                                                             </c:forEach>
                                                         </div>
-                                                        <div class="product-btns">
+                                                        <%--<div class="product-btns">
                                                             <form>
                                                                 <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Ajouter a la wishlist</span></button>
                                                             </form>
-                                                        </div>
+                                                        </div>--%>
                                                     </div>
                                                     <c:if test="${produit.quantite>0}">
                                                         <div class="add-to-cart">

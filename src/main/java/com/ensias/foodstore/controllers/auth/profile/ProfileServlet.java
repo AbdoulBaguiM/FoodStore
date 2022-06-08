@@ -33,6 +33,8 @@ public class ProfileServlet extends HttpServlet {
             query.setParameter("userId",utilisateur.getId());
             commandes = query.list();
 
+            if(session.isOpen())
+                session.close();
 
             //Marche
             request.setAttribute("categories", FoodShopDao.getAllCategories());

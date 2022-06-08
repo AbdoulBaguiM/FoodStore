@@ -1,6 +1,7 @@
 package com.ensias.foodstore.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class Produit {
     private Categorie categorie;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
 

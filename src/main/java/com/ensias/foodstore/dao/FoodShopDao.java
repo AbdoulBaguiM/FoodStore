@@ -11,6 +11,8 @@ import java.util.List;
 
 public class FoodShopDao {
 
+    /************************************ Category Section ************************************/
+
     // Get all the categories
     public static List<Categorie> getAllCategories() {
         List<Categorie> categories = new ArrayList<Categorie>();
@@ -49,6 +51,7 @@ public class FoodShopDao {
         return categorie;
     }
 
+    /************************************ Product Section ************************************/
     // Get all the products
     public static List<Produit> getAllProducts() {
         List<Produit> produits = new ArrayList<Produit>();
@@ -71,25 +74,6 @@ public class FoodShopDao {
         }
 
         return produits;
-    }
-
-    // Get promotion by Id
-    private static Promotion getPromotionById(Integer id) {
-        Promotion promotion = new Promotion();
-        Session session = HibernateUtil.getInstance().getSessionFactory().getCurrentSession();
-
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Promotion where id = :id");
-            query.setParameter("id",id);
-            if(query.list().size()>0)
-                promotion = (Promotion) query.list().get(0);
-            session.getTransaction().commit();
-        } finally {
-            session.close();
-        }
-
-        return promotion;
     }
 
     // Get all featured products
@@ -256,11 +240,91 @@ public class FoodShopDao {
         return produits;
     }
 
-    public static String[] getCoveredCities() {
-        String[] cities = {"Agadir","Casablanca","Fes","Kenitra","Meknes","Oujda","Rabat","Salé","Tanger"};
-        return cities;
+    public static List<Produit> getProductsByPrice(double minPrice, double maxPrice) {
+        List<Produit> produits = new ArrayList<Produit>();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("select p from Produit p where p.prixHt between :minPrice and :maxPrice");
+            query.setParameter("minPrice",minPrice);
+            query.setParameter("maxPrice",maxPrice);
+            produits = query.list();
+            session.getTransaction().commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+
+        for(Produit produit:produits){
+            produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+        }
+
+        return produits;
     }
 
+    /************************************ Promotion Section ************************************/
+
+    // get Promotion date
+    public static String getPromotionDateTime() {
+        return "2022-06-16T19:41:00";
+    }
+
+    // Get promotion by Id
+    private static Promotion getPromotionById(Integer id) {
+        Promotion promotion = new Promotion();
+        Session session = HibernateUtil.getInstance().getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Promotion where id = :id");
+            query.setParameter("id",id);
+            if(query.list().size()>0)
+                promotion = (Promotion) query.list().get(0);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
+        return promotion;
+    }
+
+    // Get products in promotion
+    public static List<Produit> getProductsInPromotion() {
+        List<Produit> produits = new ArrayList<Produit>();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            produits = session.createQuery("select p from Produit as p where p.promotion.id is not null").list();
+            session.getTransaction().commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+
+        for(Produit produit:produits){
+            produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
+            if(produit.getPromotion() != null){
+                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
+                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
+            }
+        }
+
+        return produits;
+    }
+
+    /************************************ Review Section ************************************/
+
+    // Get Review for a product by Id
     public static List<Review> getReviewsForProduct(int productId) {
         List<Review> reviews = new ArrayList<Review>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -284,23 +348,7 @@ public class FoodShopDao {
         return reviews;
     }
 
-    private static User getUserById(Long userId) {
-        User user= new User();
-        Session session = HibernateUtil.getInstance().getSessionFactory().getCurrentSession();
-
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from User where id = :id");
-            query.setParameter("id",userId);
-            if(query.list().size()>0)
-                user = (User) query.list().get(0);
-            session.getTransaction().commit();
-        } finally {
-            session.close();
-        }
-        return user;
-    }
-
+    // Get review for a product by Id made by a specific User
     public static Review getReviewForProductByUser(Long userId, int productId) {
         List<Review> reviews = new ArrayList<Review>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
@@ -330,6 +378,7 @@ public class FoodShopDao {
         return review;
     }
 
+    // Save or Update a review
     public static void saveOrUpdateReview(Review review) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 
@@ -351,6 +400,7 @@ public class FoodShopDao {
 
     }
 
+    // Update a product rating in (products table)
     public static void updateProductRating(Produit produit, Review review) {
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 
@@ -369,17 +419,39 @@ public class FoodShopDao {
 
     }
 
-    public static String getPromotionDateTime() {
-        return "2022-07-30T12:00:00";
+    /************************************ User Section ************************************/
+
+    // Get a user by Id
+    public static User getUserById(Long userId) {
+        User user= new User();
+        Session session = HibernateUtil.getInstance().getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from User where id = :id");
+            query.setParameter("id",userId);
+            if(query.list().size()>0)
+                user = (User) query.list().get(0);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+        return user;
     }
 
-    public static List<Produit> getProductsInPromotion() {
-        List<Produit> produits = new ArrayList<Produit>();
+    public static String[] getCoveredCities() {
+        String[] cities = {"Agadir","Casablanca","Fes","Kenitra","Meknes","Oujda","Rabat","Salé","Tanger"};
+        return cities;
+    }
+
+    public static List<Promotion> getPromotions() {
+        List<Promotion> promotions = new ArrayList<Promotion>();
         Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
 
         try {
             session.beginTransaction();
-            produits = session.createQuery("select p from Produit as p where p.promotion.id is not null").list();
+            Query query = session.createQuery("select p from Promotion p");
+            promotions = query.list();
             session.getTransaction().commit();
         }catch (HibernateException e){
             e.printStackTrace();
@@ -388,14 +460,26 @@ public class FoodShopDao {
             session.close();
         }
 
-        for(Produit produit:produits){
-            produit.setCategorie(FoodShopDao.getCategory(produit.getCategorie().getId()));
-            if(produit.getPromotion() != null){
-                produit.setPromotion(FoodShopDao.getPromotionById(produit.getPromotion().getId()));
-                produit.setPrixPromo(produit.getPrixHt()-produit.getPrixHt()*produit.getPromotion().getPercentOff()/100);
-            }
-        }
+        return promotions;
+    }
 
-        return produits;
+    public static Promotion getPromotion(int promotionId) {
+        Promotion promotion = new Promotion();
+        Session session = HibernateUtil.getInstance().getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("select p from Promotion p where p.id = :promotionId");
+            query.setParameter("promotionId",promotionId);
+            if(query.list().size()>0)
+                promotion = (Promotion) query.list().get(0);
+            session.getTransaction().commit();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+        return promotion;
     }
 }

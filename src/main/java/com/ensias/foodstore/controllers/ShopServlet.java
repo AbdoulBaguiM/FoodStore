@@ -33,6 +33,16 @@ public class ShopServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if(request.getParameter("sortByPrice") != null) {
+            double minPrice = Double.parseDouble(request.getParameter("price_min"));
+            double maxPrice = Double.parseDouble(request.getParameter("price_max"));
+
+            request.setAttribute("categories", FoodShopDao.getAllCategories());
+            request.setAttribute("bestSales", FoodShopDao.getBestSales());
+            request.setAttribute("produits",FoodShopDao.getProductsByPrice(minPrice,maxPrice));
+
+            this.getServletContext().getRequestDispatcher("/views/store.jsp").forward(request, response);
+        }
 
     }
 }

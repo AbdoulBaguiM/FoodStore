@@ -4,8 +4,8 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="tel:"><i class="fa fa-phone"></i> +212-662-158-998</a></li>
-                <li><a href="mailto:"><i class="fa fa-envelope-o"></i> foodshop.contact@gmail.com</a></li>
+                <li><a href="tel:+212662158998"><i class="fa fa-phone"></i> +212-662-158-998</a></li>
+                <li><a href="mailto:foodshop.contact@gmail.com"><i class="fa fa-envelope-o"></i> foodshop.contact@gmail.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 67, Agdal, Rue Khalil - Rabat</a></li>
             </ul>
             <ul class="header-links pull-right">
@@ -82,7 +82,7 @@
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
-                        <!-- Wishlist -->
+                        <%--<!-- Wishlist -->
                         <div>
                             <a href="#">
                                 <i class="fa fa-heart-o"></i>
@@ -90,7 +90,7 @@
                                 <div class="qty">2</div>
                             </a>
                         </div>
-                        <!-- /Wishlist -->
+                        <!-- /Wishlist -->--%>
 
                         <!-- Cart -->
                         <div class="dropdown">

@@ -124,7 +124,7 @@
                                 </div>
                             </c:if>
 
-                            <ul class="product-btns">
+                            <%--<ul class="product-btns">
                                 <li>
                                     <form action="#" method="POST">
                                         <input type="hidden" name="id" value="${produit.id}">
@@ -133,7 +133,7 @@
                                         <button class="unstyled-button" type="submit" style="font-weight: 500;text-transform: uppercase;"><i class="fa fa-heart-o"></i> Ajouter a ma Wishlist</button>
                                     </form>
                                 </li>
-                            </ul>
+                            </ul>--%>
 
                             <ul class="product-links">
                                 <li>Categorie :</li>

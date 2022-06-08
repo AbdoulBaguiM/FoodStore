@@ -58,7 +58,7 @@
                         <!-- aside Widget -->
                         <div class="aside">
                             <h3 class="aside-title">Prix (DHS)
-                                <button type="submit" class="unstyled-link" form="sortByPrice">OK</button>
+                                <button type="submit" class="unstyled-link" name="sortByPrice" form="sortByPrice">OK</button>
                             </h3>
 
                             <form action="/boutique" method="POST" id="sortByPrice">
@@ -91,7 +91,14 @@
                                     <div class="product-body">
                                         <p class="product-category"><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></p>
                                         <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
-                                        <h4 class="product-price">${produit.prixHt} DHS<del class="product-old-price">990.00 DHS</del></h4>
+                                        <c:choose>
+                                            <c:when test="${produit.prixPromo != null}">
+                                                <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <h4 class="product-price">${produit.prixHt} DHS</h4>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -161,11 +168,11 @@
                                                                 <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
                                                             </c:forEach>
                                                         </div>
-                                                        <div class="product-btns">
+                                                        <%--<div class="product-btns">
                                                             <form>
                                                                 <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Ajouter a la wishlist</span></button>
                                                             </form>
-                                                        </div>
+                                                        </div>--%>
                                                     </div>
                                                     <c:if test="${produit.quantite>0}">
                                                         <div class="add-to-cart">

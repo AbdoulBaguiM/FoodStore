@@ -128,7 +128,6 @@
                 document.getElementById("hours").innerHTML = "00";
                 document.getElementById("minutes").innerHTML = "00";
                 document.getElementById("seconds").innerHTML = "00";
-                document.querySelector("#buttonSeePromotions").disable = true;
             }
         }, 1000);
 

@@ -82,7 +82,7 @@
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
-                        <!-- Wishlist -->
+                        <%--<!-- Wishlist -->
                         <div>
                             <a href="#">
                                 <i class="fa fa-heart-o"></i>
@@ -90,7 +90,7 @@
                                 <div class="qty">2</div>
                             </a>
                         </div>
-                        <!-- /Wishlist -->
+                        <!-- /Wishlist -->--%>
 
                         <!-- Cart -->
                         <div class="dropdown">

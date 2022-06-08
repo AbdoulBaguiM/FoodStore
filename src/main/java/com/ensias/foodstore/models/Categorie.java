@@ -26,6 +26,7 @@ public class Categorie {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    @Transient
     @OneToMany(targetEntity = Produit.class, fetch = FetchType.LAZY)
     private List<Produit> produits = new ArrayList<Produit>();
 

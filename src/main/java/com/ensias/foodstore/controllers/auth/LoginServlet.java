@@ -34,8 +34,13 @@ public class LoginServlet extends HttpServlet {
 
         List<User> users = query.list();
         if(users.size()>0){
-            request.getSession().setAttribute("utilisateur",users.get(0));
-            request.getRequestDispatcher("").forward(request, response);
+            if(users.get(0).getRole().getName().equals("admin")){
+                request.getSession().setAttribute("utilisateur",users.get(0));
+                response.sendRedirect("/admin");
+            } else {
+                request.getSession().setAttribute("utilisateur",users.get(0));
+                request.getRequestDispatcher("").forward(request, response);
+            }
         } else {
             request.setAttribute("messageErreur","Identifiant ou mot de passe incorrect");
             request.setAttribute("categories",FoodShopDao.getAllCategories());

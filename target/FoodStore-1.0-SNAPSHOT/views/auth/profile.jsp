@@ -159,7 +159,7 @@
                                                         </div>
                                                         <div>
                                                             <div class="uppercase font-bold">Commande</div>
-                                                            <div align="center">${commande.id}</div>
+                                                            <div align="center">#${commande.id}</div>
                                                         </div>
                                                         <div>
                                                             <div class="uppercase font-bold">Total</div>

@@ -12,7 +12,7 @@
             </div>
 
             <!-- product -->
-            <c:forEach var="produit" items="${relatedProducts}">
+            <c:forEach var="produit" items="${relatedProducts}" begin="0" end="3">
                 <!-- product -->
                 <div class="col-md-3 col-xs-6">
                     <div class="product">
@@ -45,11 +45,11 @@
                                         <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
                                     </c:forEach>
                                 </div>
-                                <div class="product-btns">
+                                <%--<div class="product-btns">
                                     <form>
                                         <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Ajouter a la wishlist</span></button>
                                     </form>
-                                </div>
+                                </div>--%>
                             </div>
                             <c:if test="${produit.quantite>0}">
                                 <div class="add-to-cart">

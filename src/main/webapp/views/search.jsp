@@ -56,8 +56,8 @@
                                                 </div>
                                             </div>
                                             <div class="product-body">
-                                                <p class="product-category">${produit.categorie.nom}</p>
-                                                <h3 class="product-name"><a href="#">${produit.nom}</a></h3>
+                                                <p class="product-category"><a href="/boutique?id=${produit.categorie.id}">${produit.categorie.nom}</a></p>
+                                                <h3 class="product-name"><a href="/produit?id=${produit.id}">${produit.nom}</a></h3>
                                                 <c:choose>
                                                     <c:when test="${produit.prixPromo != null}">
                                                         <h4 class="product-price">${produit.prixPromo} DHS<del class="product-old-price">${produit.prixHt} DHS</del></h4>
@@ -71,11 +71,11 @@
                                                         <i class="fa fa-star${produit.ratingCache >= star ? '' : '-o empty'}"></i>
                                                     </c:forEach>
                                                 </div>
-                                                <div class="product-btns">
+                                                <%--<div class="product-btns">
                                                     <form>
                                                         <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Ajouter a la wishlist</span></button>
                                                     </form>
-                                                </div>
+                                                </div>--%>
                                             </div>
                                             <c:if test="${produit.quantite>0}">
                                                 <div class="add-to-cart">
