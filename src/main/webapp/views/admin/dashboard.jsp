@@ -84,8 +84,10 @@
                 <p class="text-white mt-5 mb-5">Bienvenue, <b>${utilisateur.name}</b></p>
             </div>
         </div>
+
         <!-- row -->
         <div class="row tm-content-row">
+
             <div class="col-12 tm-block-col">
                 <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
                     <h2 class="tm-block-title">Liste des commandes</h2>
@@ -167,31 +169,7 @@
 <script src="/adminAssets/js/bootstrap.min.js"></script>
 <!-- https://getbootstrap.com/ -->
 <script src="/adminAssets/js/tooplate-scripts.js"></script>
-<script>
-    Chart.defaults.global.defaultFontColor = 'white';
-    let ctxLine,
-        ctxBar,
-        ctxPie,
-        optionsLine,
-        optionsBar,
-        optionsPie,
-        configLine,
-        configBar,
-        configPie,
-        lineChart;
-    barChart, pieChart;
-    // DOM is ready
-    $(function () {
-        drawLineChart(); // Line Chart
-        drawBarChart(); // Bar Chart
-        drawPieChart(); // Pie Chart
 
-        $(window).resize(function () {
-            updateLineChart();
-            updateBarChart();
-        });
-    })
-</script>
 </body>
 
 </html>

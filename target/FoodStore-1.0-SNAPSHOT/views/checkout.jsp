@@ -137,7 +137,7 @@
                             </div>
 
                             <div class="input-radio">
-                                <input type="radio" name="payement" id="payment-2" value=1 form="payment-form" required>
+                                <%--<input type="radio" name="payement" id="payment-2" value=1 form="payment-form" required>
                                 <label for="payment-2">
                                     <span></span>
                                     Paiement par carte bancaire
@@ -146,7 +146,7 @@
                                     <p style="text-align: justify">C'est une option prepayee securisee et rapide.
                                         Pour garantir le bon deroulement de votre paiement, priere de vous assurer que vous disposez des fonds necessaires sur votre carte.</p>
 
-                                </div>
+                                </div>--%>
                             </div>
                         </div>
 
