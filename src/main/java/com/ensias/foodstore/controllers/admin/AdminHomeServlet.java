@@ -1,8 +1,12 @@
 package com.ensias.foodstore.controllers.admin;
 
 import com.ensias.foodstore.dao.AdminDao;
+import com.ensias.foodstore.dao.CategorieDao;
 import com.ensias.foodstore.dao.FoodShopDao;
+import com.ensias.foodstore.dao.OrderDao;
 import com.ensias.foodstore.dao.interfaces.AdminDaoInterface;
+import com.ensias.foodstore.dao.interfaces.CategorieDaoInterface;
+import com.ensias.foodstore.dao.interfaces.OrdersDaoInterface;
 import com.ensias.foodstore.models.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -13,11 +17,13 @@ import java.io.IOException;
 @WebServlet(name = "AdminHomeServlet", value = "/admin")
 public class AdminHomeServlet extends HttpServlet {
 
-    private AdminDaoInterface adminDao;
+    private OrdersDaoInterface orderDao;
+    private CategorieDaoInterface categorieDao;
 
     @Override
     public void init() throws ServletException {
-        adminDao = new AdminDao();
+        orderDao = new OrderDao();
+        categorieDao = new CategorieDao();
     }
 
     @Override
@@ -26,12 +32,12 @@ public class AdminHomeServlet extends HttpServlet {
         User admin = (User) request.getSession().getAttribute("utilisateur");
         if(admin != null && admin.getRole().getName().equals("admin")) {
 
-            request.setAttribute("commandes",adminDao.getAllOrders());
+            request.setAttribute("commandes",orderDao.getAllOrders());
             this.getServletContext().getRequestDispatcher("/views/admin/dashboard.jsp").forward(request, response);
 
         } else {
-            request.setAttribute("messageErreur","Identifiant ou mot de passe incorrect");
-            request.setAttribute("categories",FoodShopDao.getAllCategories());
+            request.setAttribute("messageErreur","Vous n'avez pas les autorisations requises");
+            request.setAttribute("categories",categorieDao.getAllCategories());
             request.getRequestDispatcher("/views/auth/signIn.jsp").forward(request, response);
         }
     }

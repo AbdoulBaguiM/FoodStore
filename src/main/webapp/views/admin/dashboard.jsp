@@ -92,11 +92,10 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">COMMANDE NO</th>
+                            <th scope="col">N°</th>
                             <th scope="col">STATUT</th>
                             <th scope="col">CLIENT</th>
                             <th scope="col">ADRESSE</th>
-                            <th scope="col">VILLE</th>
                             <th scope="col">TOTAL</th>
                             <th scope="col">DATE DE COMMANDE</th>
                             <th scope="col">ACTIONS</th>
@@ -114,29 +113,28 @@
                                         </c:when>
                                         <c:when test="${commande.statut == 1}">
                                             <div class="tm-status-circle moving">
-                                            </div>Expediee
+                                            </div>Expediée
                                         </c:when>
                                         <c:when test="${commande.statut == 2}">
                                             <div class="tm-status-circle moving">
-                                            </div>Recu
+                                            </div>Reçue
                                         </c:when>
                                         <c:otherwise>
                                                 <div class="tm-status-circle cancelled">
-                                                </div>Annulee
+                                                </div>Annulée
                                         </c:otherwise>
                                     </c:choose>
 
                                 </td>
                                 <td><b>${commande.CEmail}</b></td>
                                 <td><b>${commande.CAdresse}</b></td>
-                                <td><b>${commande.CVille}</b></td>
                                 <td>${commande.CTotal} DHS</td>
                                 <td>${commande.createdAt}</td>
-                                <td>
-                                    <a href="#" class="tm-product-delete-link">
+                                <td align="center">
+                                    <a href="/admin/commandes?id=${commande.id}" class="tm-product-delete-link">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    <a href="#" class="tm-product-delete-link">
+                                    <a href="/admin/commandes?id=${commande.id}&del" class="tm-product-delete-link">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </td>

@@ -45,7 +45,7 @@ public class AddEditUserServlet extends HttpServlet {
             } else {
                 userDao.deleteUser(utilisateur);
                 request.setAttribute("users", userDao.getAllUsers());
-                this.getServletContext().getRequestDispatcher("/views/admin/users.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/admin/users.jsp").forward(request, response);
             }
         }
     }

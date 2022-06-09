@@ -70,6 +70,7 @@ public class CategoriesManagementServlet extends HttpServlet {
         }
 
         request.removeAttribute("id");
-        doGet(request,response);
+        request.setAttribute("categories", categorieDao.getAllCategories());
+        this.getServletContext().getRequestDispatcher("/views/admin/categories.jsp").forward(request, response);
     }
 }

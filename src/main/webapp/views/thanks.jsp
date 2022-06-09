@@ -17,7 +17,7 @@
                         <p class="lead"><strong>Veuillez verifier votre boite mail</strong> pour <a href="/profil#orders">visualiser votre commande</a></p>
                         <hr>
                         <p>
-                            Vous rencontrez des difficultes ?<a href="#">Contactez-nous</a>
+                            Vous rencontrez des difficultes ?<a href="/contactez-nous"> Contactez-nous</a>
                         </p>
                         <p class="lead">
                             <a href="/boutique" class="btn btn-primary btn-lg" role="button"  style="background-color: #F96302">

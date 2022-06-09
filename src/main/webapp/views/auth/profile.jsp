@@ -106,7 +106,7 @@
                                     <div class="col-md-6">
                                         <label for="zipcode">Code Postal</label>
                                         <input type="text" class="form-control" name="zipcode" id="zipcode"
-                                               value="${utilisateur.zipcode}" placeholder="Code Postal">
+                                               value="${commande.CZipcode}" placeholder="Code Postal">
                                     </div>
                                 </div>
                                 <div class="form-group">
